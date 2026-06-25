@@ -1,3 +1,5 @@
+# 网页数据抓取
+
 ### **脚本功能说明**
 
 这个Python脚本的主要功能是**从指定的URL抓取网页内容，并使用BeautifulSoup解析HTML结构**。具体来说，它发送一个HTTP GET请求到目标网站，获取网页的HTML内容，然后使用BeautifulSoup将HTML解析为可操作的对象，最后提取并打印网页的标题。

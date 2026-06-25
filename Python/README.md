@@ -8,11 +8,11 @@
 
 [Python 学习导读](LEARNING_GUIDE.md) 串起小项目路线、虚拟环境、命令行参数、文件处理、数据处理、爬虫安全边界和脚本打包思路。
 
-[Python 常见问题](FAQ.md) 汇总解释解释器、依赖安装、虚拟环境、相对路径、双击运行、数据结构、爬虫和批量文件处理常见疑问。
+[Python 常见问题](FAQ.md) 汇总解释器、依赖安装、虚拟环境、相对路径、双击运行、数据结构、爬虫和批量文件处理常见疑问。
 
 [Python 小项目学习路线](PROJECT_ROADMAP.md) 按输入输出、文本处理、文件整理、表格处理、图片/PDF、网络请求、命令行工具和算法示例安排学习顺序。
 
-[Python 环境与依赖管理指南](ENVIRONMENT_GUIDE.md) 专门解释解释器路径、虚拟环境、`pip`、`requirements.txt` 和 VS Code 解释器选择。
+[Python 环境与依赖管理指南](ENVIRONMENT_GUIDE.md) 专门说明当前 Python 解释器路径、虚拟环境、`pip`、`requirements.txt` 和 VS Code 解释器选择。
 
 ### 外部资源导读
 

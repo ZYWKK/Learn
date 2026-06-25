@@ -41,7 +41,7 @@ powershell -ExecutionPolicy Bypass -File .\scripts\check-docs.ps1
 
 ## 备注
 
-- 暂无
+- 本次只修改文档，不涉及代码运行逻辑。
 ```
 
 PR 描述不用很长，但要让 Reviewer 知道你希望他看什么。
@@ -65,7 +65,7 @@ Review 时优先看：
 不太好：
 
 ```text
-这里不行。
+这里写得不好。
 ```
 
 更好：
