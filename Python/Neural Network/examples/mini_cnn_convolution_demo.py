@@ -24,7 +24,8 @@ def convolve2d(image, kernel):
             total = 0
             for kernel_row in range(kernel_size):
                 for kernel_col in range(kernel_size):
-                    total += image[row + kernel_row][col + kernel_col] * kernel[kernel_row][kernel_col]
+                    pixel = image[row + kernel_row][col + kernel_col]
+                    total += pixel * kernel[kernel_row][kernel_col]
             output_row.append(total)
         output.append(output_row)
     return output
@@ -65,4 +66,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

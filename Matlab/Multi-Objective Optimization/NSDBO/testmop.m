@@ -34,8 +34,9 @@ function mop = testmop(testname, dimension)
     % 初始化测试问题结构体
     mop = struct('name',[],'od',[],'pd',[],'domain',[],'func',[]);
     
-    % 动态调用对应的测试问题生成器函数
-    eval(['mop=',testname,'(mop,',num2str(dimension),');']);
+    % 通过函数句柄调用测试问题生成器，避免拼接并执行代码字符串。
+    generator = str2func(testname);
+    mop = generator(mop, dimension);
 end
 
 %% ----------Stationary Multi-Objective Benchmark----------

@@ -17,7 +17,7 @@
 3. 更新当前目录 `README.md`。
 4. 如影响全局入口，更新根目录 `README.md` 和 `docs/LEARNING_PATH.md`。
 5. 如是重要结构调整，更新 `CHANGELOG.md`。
-6. 运行文档检查脚本。
+6. 运行代码和文档检查脚本。
 7. 查看 `git status --short`，确认没有临时文件。
 
 ## 文档检查脚本
@@ -33,6 +33,23 @@ powershell -ExecutionPolicy Bypass -File .\scripts\check-docs.ps1
 - Markdown 本地链接是否存在。
 - 代码块是否闭合。
 - 一级目录是否包含 `README.md`。
+
+## 代码检查脚本
+
+运行：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\check-code.ps1
+```
+
+检查内容：
+
+- Python 语法、行长、通配符导入、文本编码和网络请求超时。
+- JavaScript 与 PowerShell 语法。
+- HTML 页面的 doctype、语言、字符集、viewport、标题、重复 ID、图片 alt 和按钮类型。
+- Matlab 主函数名是否与文件名完全一致。
+
+详细规则见 [示例代码规范](../docs/CODE_STYLE.md)。Matlab Code Analyzer 的性能、未使用变量和旧 API 提示不会全部作为提交阻断项，应按案例逐步处理。
 
 ## 常见失败原因
 
@@ -77,7 +94,9 @@ powershell -ExecutionPolicy Bypass -File .\scripts\check-docs.ps1
 ```powershell
 git status --short
 git diff --stat
+powershell -ExecutionPolicy Bypass -File .\scripts\check-code.ps1
 powershell -ExecutionPolicy Bypass -File .\scripts\check-docs.ps1
+git diff --check
 ```
 
 如果出现缓存、临时文件、下载包、系统生成文件，不要一起提交。

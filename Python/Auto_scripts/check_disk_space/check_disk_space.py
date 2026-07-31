@@ -8,6 +8,9 @@ def check_disk_space(path, threshold):
     参数:
     path (str): 要检查的路径，例如根目录 '/'。
     threshold (int): 剩余磁盘空间的阈值（以GB为单位）。
+
+    返回:
+    int: 剩余空间的 GiB 整数。
     """
     # 使用 shutil.disk_usage() 获取磁盘的总空间、已用空间和剩余空间（单位为字节）
     total, used, free = shutil.disk_usage(path)
@@ -20,6 +23,8 @@ def check_disk_space(path, threshold):
         print(f"Warning: Free disk space is below {threshold} GB.")
     else:
         print(f"Free disk space: {free_gb} GB.")
+
+    return free_gb
 
 # 使用示例
 if __name__ == "__main__":

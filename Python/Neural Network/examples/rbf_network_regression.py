@@ -36,7 +36,8 @@ def train(samples, centers, width=1.0, learning_rate=0.05, epochs=1000):
 
         for x, target in samples:
             current_features = features(x, centers, width)
-            output = bias + sum(feature * weight for feature, weight in zip(current_features, weights))
+            weighted_features = zip(current_features, weights)
+            output = bias + sum(feature * weight for feature, weight in weighted_features)
             error = output - target
             total_loss += error * error
 
@@ -73,4 +74,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

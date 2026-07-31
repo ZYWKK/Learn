@@ -81,7 +81,14 @@ def main():
         probability_x = predict(features, weights, bias)
         predicted = "x" if probability_x >= 0.5 else "o"
         print_image(image)
-        print("expected:", label, "predicted:", predicted, "probability_x:", round(probability_x, 3))
+        print(
+            "expected:",
+            label,
+            "predicted:",
+            predicted,
+            "probability_x:",
+            round(probability_x, 3),
+        )
         print()
 
 

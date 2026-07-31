@@ -1,0 +1,19 @@
+* text=auto eol=lf
+
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.tif binary
+*.tiff binary
+*.ico binary
+*.pdf binary
+*.xlsx binary
+*.xls binary
+*.mat binary
+*.zip binary
+*.mexw64 binary
+

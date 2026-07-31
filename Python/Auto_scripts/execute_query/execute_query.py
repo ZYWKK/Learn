@@ -20,7 +20,7 @@ def connect_to_database(db_path):
     return conn, cursor  # 返回连接对象和游标
 
 # 执行 SQL 查询的函数
-def execute_query(cursor, query):
+def execute_query(cursor, query, parameters=()):
     """
     使用游标执行指定的 SQL 查询，并返回查询结果。
 
@@ -32,7 +32,7 @@ def execute_query(cursor, query):
     list: 查询结果，以列表的形式返回。
     """
     # 执行 SQL 查询
-    cursor.execute(query)
+    cursor.execute(query, parameters)
 
     # 获取所有查询结果
     results = cursor.fetchall()
@@ -42,7 +42,8 @@ def execute_query(cursor, query):
 # 使用示例
 if __name__ == "__main__":
     # 连接到数据库
-    conn, cursor = connect_to_database('/path/to/database.db')  # 请将 '/path/to/database.db' 替换为实际数据库路径
+    # 请将路径替换为实际数据库文件。
+    conn, cursor = connect_to_database('/path/to/database.db')
 
     # 执行查询以获取表中的所有记录
     query = 'SELECT * FROM table_name'  # 替换 'table_name' 为实际的表名

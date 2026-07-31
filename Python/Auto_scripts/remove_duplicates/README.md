@@ -1,5 +1,8 @@
 # Excel 去重脚本
 
+> [!IMPORTANT]
+> 当前脚本默认生成新的 `*_deduplicated.xlsx` 文件，不覆盖原文件。本页保留原始逐行讲解；实际使用请先看 [统一运行与安全说明](../STANDARDIZED_USAGE.md)，并以 [remove_duplicates.py](remove_duplicates.py) 为准。
+
 ### **脚本功能说明**
 
 这个Python脚本的主要功能是**从指定的Excel文件中移除重复的行，并将修改后的数据保存回原文件**。它使用了 `pandas` 库来读取Excel文件、删除重复项，并将数据写回文件。具体步骤如下：

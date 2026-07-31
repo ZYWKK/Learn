@@ -107,7 +107,8 @@ def assign_crowding_distance(population, front):
         for position in range(1, len(front) - 1):
             previous_value = population[front[position - 1]]["objectives"][objective_index]
             next_value = population[front[position + 1]]["objectives"][objective_index]
-            population[front[position]]["crowding"] += (next_value - previous_value) / (max_value - min_value)
+            distance = (next_value - previous_value) / (max_value - min_value)
+            population[front[position]]["crowding"] += distance
 
 
 def sort_population(population):

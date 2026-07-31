@@ -58,7 +58,8 @@ def train(samples, class_count=3, learning_rate=0.2, epochs=1200):
                     total_loss -= math.log(max(probabilities[class_index], 1e-12))
 
                 for feature_index in range(feature_count):
-                    weights[class_index][feature_index] -= learning_rate * error * inputs[feature_index]
+                    gradient = error * inputs[feature_index]
+                    weights[class_index][feature_index] -= learning_rate * gradient
                 biases[class_index] -= learning_rate * error
 
         if (epoch + 1) % 300 == 0:
@@ -85,7 +86,10 @@ def main():
     for inputs, target_class in samples:
         probabilities = predict_probabilities(inputs, weights, biases)
         predicted_class = argmax(probabilities)
-        formatted = ", ".join(f"{name}={probabilities[index]:.3f}" for index, name in enumerate(class_names))
+        formatted = ", ".join(
+            f"{name}={probabilities[index]:.3f}"
+            for index, name in enumerate(class_names)
+        )
         print(
             f"{inputs} -> predicted={class_names[predicted_class]}, "
             f"target={class_names[target_class]}, probabilities=({formatted})"
@@ -94,4 +98,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

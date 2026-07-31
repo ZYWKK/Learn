@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# JavaScript
+node_modules/
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Editors and operating systems
+.idea/
+.vscode/
+.agents/
+.codex/
+.DS_Store
+Thumbs.db
+*~
+
+# Matlab generated files
+*.asv
+slprj/
+codegen/
+
+# Example-script runtime output
+*.log
+failed_downloads.txt

@@ -1,5 +1,8 @@
 # 调整图片尺寸
 
+> [!IMPORTANT]
+> 本页保留原始逐行讲解；当前脚本已改用 Pillow 新版重采样 API。请先看 [统一运行与安全说明](../STANDARDIZED_USAGE.md)，并以 [resize_image.py](resize_image.py) 为准。
+
 ### **脚本功能说明**
 
 这个Python脚本的主要功能是**将图像文件的尺寸调整为指定的宽度和高度，并将调整后的图像保存到指定的路径**。它使用 `PIL`（Python Imaging Library，现在叫 `Pillow`）来实现图像的读取、调整大小和保存。具体步骤如下：
@@ -28,7 +31,7 @@ def resize_image(input_path, output_path, width, height):
     image = Image.open(input_path)
 
     # 调整图像的大小，使用 ANTIALIAS 算法提高质量
-    resized_image = image.resize((width, height), Image.ANTIALIAS)
+    resized_image = image.resize((width, height), Image.Resampling.LANCZOS)
 
     # 保存调整后的图像到指定输出路径
     resized_image.save(output_path)
@@ -54,7 +57,7 @@ if __name__ == "__main__":
         将输入的图像调整为指定宽度和高度，并保存到输出路径。
         """
         image = Image.open(input_path)
-        resized_image = image.resize((width, height), Image.ANTIALIAS)
+        resized_image = image.resize((width, height), Image.Resampling.LANCZOS)
         resized_image.save(output_path)
     ```
     - **参数**：
@@ -64,8 +67,8 @@ if __name__ == "__main__":
         - `height`：调整后的图像高度（以像素为单位）。
     - **功能**：
         - 使用 `Image.open(input_path)` 打开指定路径的图像。
-        - 使用 `image.resize((width, height), Image.ANTIALIAS)` 调整图像大小。
-          - `Image.ANTIALIAS` 是一种抗锯齿算法，用于提高缩放后的图像质量，尤其适用于缩小图像。
+    - 使用 `image.resize((width, height), Image.Resampling.LANCZOS)` 调整图像大小。
+    - `Image.Resampling.LANCZOS` 是当前 Pillow 推荐的高质量缩放算法。
         - 使用 `resized_image.save(output_path)` 将调整后的图像保存到指定的输出路径。
 
 3. **使用示例**
@@ -90,7 +93,7 @@ if __name__ == "__main__":
     - 脚本支持多种图像格式，如 `JPEG`, `PNG`, `BMP` 等。`Pillow` 能够自动根据文件扩展名处理大部分常见图像格式。
 
 3. **图像质量**
-    - `resize()` 方法使用了 `Image.ANTIALIAS` 参数，这是一种抗锯齿算法，用于在缩小图像时保持较高的图像质量。这个参数在 `Pillow` 最新版本中已被替换为 `Image.LANCZOS`，如果遇到版本兼容性问题，可以替换为：
+    - `resize()` 使用 `Image.Resampling.LANCZOS`，适用于当前 Pillow 版本。旧教程中的 `Image.ANTIALIAS` 已被移除，不要继续复制旧写法。
       ```python
       resized_image = image.resize((width, height), Image.LANCZOS)
       ```
@@ -113,7 +116,7 @@ if __name__ == "__main__":
         # 根据目标宽度计算相应的高度，保持比例
         w_percent = base_width / float(image.size[0])
         height = int((float(image.size[1]) * w_percent))
-        resized_image = image.resize((base_width, height), Image.ANTIALIAS)
+    resized_image = image.resize((base_width, height), Image.Resampling.LANCZOS)
         resized_image.save(output_path)
 
     # 使用示例
@@ -173,7 +176,7 @@ if __name__ == "__main__":
         height (int): 调整后图像的高度（像素）。
         """
         image = Image.open(input_path)
-        resized_image = image.resize((width, height), Image.ANTIALIAS)
+        resized_image = image.resize((width, height), Image.Resampling.LANCZOS)
         # 保存图像时保持原始的格式
         resized_image.save(output_path, format=image.format)
 
@@ -204,7 +207,7 @@ if __name__ == "__main__":
             height = max_side
             width = int(max_side * aspect_ratio)
 
-        resized_image = image.resize((width, height), Image.ANTIALIAS)
+    resized_image = image.resize((width, height), Image.Resampling.LANCZOS)
         resized_image.save(output_path)
 
     # 使用示例

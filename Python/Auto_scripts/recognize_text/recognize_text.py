@@ -13,10 +13,9 @@ def recognize_text(image_path):
     str: 识别出的文本内容。
     """
     # 打开输入的图像文件
-    image = Image.open(image_path)
-
-    # 使用 pytesseract 对图像进行 OCR，提取文本
-    text = pytesseract.image_to_string(image, lang='chi_sim')  # 使用简体中文语言识别
+    with Image.open(image_path) as image:
+        # 使用 pytesseract 对图像进行 OCR，提取文本
+        text = pytesseract.image_to_string(image, lang='chi_sim')
 
     return text  # 返回识别出的文本内容
 

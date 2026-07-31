@@ -75,7 +75,11 @@ def main():
 
             for neighbor_index in neighbor_indexes:
                 neighbor_weights = weight_vectors[neighbor_index]
-                old_score = tchebycheff(population[neighbor_index]["objectives"], neighbor_weights, ideal_point)
+                old_score = tchebycheff(
+                    population[neighbor_index]["objectives"],
+                    neighbor_weights,
+                    ideal_point,
+                )
                 new_score = tchebycheff(child["objectives"], neighbor_weights, ideal_point)
 
                 if new_score < old_score:
@@ -92,4 +96,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

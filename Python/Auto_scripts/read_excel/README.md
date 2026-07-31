@@ -1,5 +1,8 @@
 # Excel 读写脚本
 
+> [!IMPORTANT]
+> 本页保留原始逐行讲解；实际运行前请先看 [统一运行与安全说明](../STANDARDIZED_USAGE.md)，并以 [read_excel.py](read_excel.py) 为准。
+
 ### **脚本功能说明**
 
 这个Python脚本的主要功能是**读取和写入Excel文件**，它使用了 `pandas` 库来处理Excel文件。具体功能如下：

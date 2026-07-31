@@ -5,7 +5,7 @@ def _append_log(log_path, message):
     with open(log_path, "a", encoding="utf-8") as log_file:
         log_file.write(message + "\n")
 
-def rename_files(directory_path, old_name, new_name, log_path=None):
+def rename_files(directory_path, old_name, new_name, log_path=None, dry_run=True):
     """
     在指定目录中查找包含特定子字符串的文件，并将其重命名。
 
@@ -14,7 +14,11 @@ def rename_files(directory_path, old_name, new_name, log_path=None):
     old_name (str): 文件名中需要被替换的旧子字符串。
     new_name (str): 用于替换的新子字符串。
     log_path (str): 重命名日志文件路径，默认保存在目标目录下。
+    dry_run (bool): 为 True 时只显示重命名计划，不修改文件。
     """
+    if not old_name:
+        raise ValueError('old_name 不能为空')
+
     if log_path is None:
         log_path = os.path.join(directory_path, "rename_files.log")
 
@@ -29,7 +33,7 @@ def rename_files(directory_path, old_name, new_name, log_path=None):
             if old_name in filename:
                 # 创建新的文件名，将旧子字符串替换为新的子字符串
                 new_filename = filename.replace(old_name, new_name)
-                
+
                 # 构建完整的旧文件路径和新文件路径
                 old_file = os.path.join(directory_path, filename)
                 new_file = os.path.join(directory_path, new_filename)
@@ -37,9 +41,13 @@ def rename_files(directory_path, old_name, new_name, log_path=None):
                 if os.path.exists(new_file):
                     message = f"跳过重命名，目标文件已存在: '{new_filename}'"
                     print(message)
-                    _append_log(log_path, f"SKIPPED_EXISTS\t{old_file}\t{new_file}")
+                    if not dry_run:
+                        _append_log(log_path, f"SKIPPED_EXISTS\t{old_file}\t{new_file}")
                     continue
-                
+                if dry_run:
+                    print(f"预演：将重命名 '{filename}' -> '{new_filename}'")
+                    continue
+
                 try:
                     # 执行重命名操作
                     os.rename(old_file, new_file)
@@ -52,5 +60,5 @@ def rename_files(directory_path, old_name, new_name, log_path=None):
 
 # 使用示例
 if __name__ == "__main__":
-    # 调用rename_files函数，传入要操作的目录路径、旧子字符串和新子字符串
-    rename_files('/path/to/directory', 'old', 'new')  # 请将'/path/to/directory'、'old'和'new'替换为实际值
+    # 默认只预演。确认列表无误后，再传入 dry_run=False。
+    rename_files('/path/to/directory', 'old', 'new')

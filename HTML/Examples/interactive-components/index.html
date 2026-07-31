@@ -15,22 +15,22 @@
 
     <section class="panel">
       <h2>Tabs</h2>
-      <div class="tabs">
-        <button class="tab active" data-tab="html">HTML</button>
-        <button class="tab" data-tab="css">CSS</button>
-        <button class="tab" data-tab="js">JavaScript</button>
+      <div class="tabs" role="tablist" aria-label="网页技术介绍">
+        <button class="tab active" type="button" role="tab" aria-selected="true" data-tab="html">HTML</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" data-tab="css">CSS</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" data-tab="js">JavaScript</button>
       </div>
       <div class="tab-content active" id="html">HTML 负责页面结构，例如标题、按钮、列表和表单。</div>
-      <div class="tab-content" id="css">CSS 负责视觉样式，例如颜色、间距、布局和动画。</div>
-      <div class="tab-content" id="js">JavaScript 负责交互逻辑，例如点击、切换和数据更新。</div>
+      <div class="tab-content" id="css" hidden>CSS 负责视觉样式，例如颜色、间距、布局和动画。</div>
+      <div class="tab-content" id="js" hidden>JavaScript 负责交互逻辑，例如点击、切换和数据更新。</div>
     </section>
 
     <section class="panel">
       <h2>FAQ</h2>
-      <button class="faq-question">这个案例需要安装依赖吗？</button>
-      <p class="faq-answer">不需要，直接打开 HTML 文件即可。</p>
-      <button class="faq-question">我应该先看哪个文件？</button>
-      <p class="faq-answer">先看 index.html，再看 style.css，最后看 script.js。</p>
+      <button class="faq-question" type="button" aria-expanded="false">这个案例需要安装依赖吗？</button>
+      <p class="faq-answer" hidden>不需要，直接打开 HTML 文件即可。</p>
+      <button class="faq-question" type="button" aria-expanded="false">我应该先看哪个文件？</button>
+      <p class="faq-answer" hidden>先看 index.html，再看 style.css，最后看 script.js。</p>
     </section>
 
     <section class="panel">
@@ -40,17 +40,16 @@
         <span class="step">2</span>
         <span class="step">3</span>
       </div>
-      <button id="next-step">下一步</button>
+      <button id="next-step" type="button">下一步</button>
     </section>
 
     <section class="panel">
       <h2>Toast</h2>
-      <button id="show-toast">显示提示</button>
+      <button id="show-toast" type="button">显示提示</button>
     </section>
   </main>
 
-  <div class="toast" id="toast">已保存当前练习进度</div>
+  <div class="toast" id="toast" role="status" aria-live="polite">已保存当前练习进度</div>
   <script src="script.js"></script>
 </body>
 </html>
-

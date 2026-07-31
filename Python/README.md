@@ -43,6 +43,8 @@
 
 推荐先看 [Auto_scripts 脚本索引](Auto_scripts/README.md)，按用途选择脚本。
 
+真正运行批量操作或账号脚本前，再读 [统一运行与安全说明](Auto_scripts/STANDARDIZED_USAGE.md)，了解预演模式、环境变量和标准化后的默认行为。
+
 ### Neural Network
 
 [Neural Network](<Neural Network/README.md>) 保存 Python 神经网络入门示例。

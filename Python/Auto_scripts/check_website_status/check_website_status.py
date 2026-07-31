@@ -10,7 +10,7 @@ def check_website_status(url):
     """
     try:
         # 发送 GET 请求到指定 URL
-        response = requests.get(url)
+        response = requests.get(url, timeout=10)
 
         # 检查响应的状态码
         if response.status_code == 200:

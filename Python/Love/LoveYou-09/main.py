@@ -1,6 +1,6 @@
 import random  # 导入随机数生成库
 from math import sin, cos, pi, log  # 导入数学库中的三角函数和对数
-from tkinter import *  # 导入Tkinter库用于创建图形用户界面
+from tkinter import Canvas, Tk  # 导入需要的Tkinter组件
 
 # 画布的宽和高
 CANVAS_WIDTH = 840  # 画布的宽度
@@ -25,8 +25,8 @@ def heart_function(t, shrink_ratio: float = IMAGE_ENLARGE):
     y = -(16 * cos(t) - 5 * cos(2 * t) - 2 * cos(3 * t) - cos(4 * t))  # 计算Y坐标
 
     # 放大坐标
-    x *= IMAGE_ENLARGE  # 将X坐标按放大比例缩放
-    y *= IMAGE_ENLARGE  # 将Y坐标按放大比例缩放
+    x *= shrink_ratio  # 将X坐标按指定比例缩放
+    y *= shrink_ratio  # 将Y坐标按指定比例缩放
 
     # 将坐标移到画布中央
     x += CANVAS_CENTER_X  # X坐标平移至画布中心
@@ -61,11 +61,12 @@ def shrink(x, y, ratio):
     :return: 新坐标 (x, y)
     """
     # 计算力的影响
-    force = -1 / (((x - CANVAS_CENTER_X) ** 2 + (y - CANVAS_CENTER_Y) ** 2) ** 0.6)  # 使用魔法参数
+    distance = (x - CANVAS_CENTER_X) ** 2 + (y - CANVAS_CENTER_Y) ** 2
+    force = -1 / (distance**0.6)  # 使用魔法参数
     # 计算新的坐标偏移量
     dx = ratio * force * (x - CANVAS_CENTER_X)  # X方向的抖动
     dy = ratio * force * (y - CANVAS_CENTER_Y)  # Y方向的抖动
-    
+
     return x - dx, y - dy  # 返回新的坐标
 
 def curve(p):
@@ -127,11 +128,12 @@ class Heart:
         :return: 新坐标 (x, y)
         """
         # 计算力的影响
-        force = 1 / (((x - CANVAS_CENTER_X) ** 2 + (y - CANVAS_CENTER_Y) ** 2) ** 0.420)  # 魔法参数
+        distance = (x - CANVAS_CENTER_X) ** 2 + (y - CANVAS_CENTER_Y) ** 2
+        force = 1 / (distance**0.420)  # 魔法参数
         # 计算新的坐标偏移量
         dx = ratio * force * (x - CANVAS_CENTER_X) + random.randint(-1, 1)  # X方向抖动
         dy = ratio * force * (y - CANVAS_CENTER_Y) + random.randint(-1, 1)  # Y方向抖动
-        
+
         return x - dx, y - dy  # 返回新的坐标
 
     def calc(self, generate_frame):
@@ -193,7 +195,14 @@ class Heart:
         """
         # 遍历当前帧的所有点并绘制
         for x, y, size in self.all_points[render_frame % self.generate_frame]:
-            render_canvas.create_rectangle(x, y, x + size, y + size, width=0, fill=HEART_COLOR)  # 绘制矩形
+            render_canvas.create_rectangle(
+                x,
+                y,
+                x + size,
+                y + size,
+                width=0,
+                fill=HEART_COLOR,
+            )
 
 def draw(main: Tk, render_canvas: Canvas, render_heart: Heart, render_frame=0):
     """

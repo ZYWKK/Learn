@@ -60,7 +60,13 @@ def main():
         total_loss = 0.0
 
         for inputs in samples:
-            hidden, outputs = forward(inputs, encoder_weights, encoder_biases, decoder_weights, decoder_biases)
+            hidden, outputs = forward(
+                inputs,
+                encoder_weights,
+                encoder_biases,
+                decoder_weights,
+                decoder_biases,
+            )
 
             output_deltas = []
             for output_index in range(3):
@@ -72,17 +78,22 @@ def main():
             for hidden_index in range(2):
                 error = 0.0
                 for output_index in range(3):
-                    error += output_deltas[output_index] * decoder_weights[output_index][hidden_index]
+                    error += (
+                        output_deltas[output_index]
+                        * decoder_weights[output_index][hidden_index]
+                    )
                 hidden_deltas.append(error * sigmoid_derivative(hidden[hidden_index]))
 
             for output_index in range(3):
                 for hidden_index in range(2):
-                    decoder_weights[output_index][hidden_index] -= learning_rate * output_deltas[output_index] * hidden[hidden_index]
+                    gradient = output_deltas[output_index] * hidden[hidden_index]
+                    decoder_weights[output_index][hidden_index] -= learning_rate * gradient
                 decoder_biases[output_index] -= learning_rate * output_deltas[output_index]
 
             for hidden_index in range(2):
                 for input_index in range(3):
-                    encoder_weights[hidden_index][input_index] -= learning_rate * hidden_deltas[hidden_index] * inputs[input_index]
+                    gradient = hidden_deltas[hidden_index] * inputs[input_index]
+                    encoder_weights[hidden_index][input_index] -= learning_rate * gradient
                 encoder_biases[hidden_index] -= learning_rate * hidden_deltas[hidden_index]
 
         if (epoch + 1) % 2000 == 0:
@@ -90,7 +101,13 @@ def main():
 
     print("\nReconstruction results:")
     for inputs in samples:
-        hidden, outputs = forward(inputs, encoder_weights, encoder_biases, decoder_weights, decoder_biases)
+        hidden, outputs = forward(
+            inputs,
+            encoder_weights,
+            encoder_biases,
+            decoder_weights,
+            decoder_biases,
+        )
         rounded_outputs = [round(value) for value in outputs]
         print(
             f"input={inputs}, hidden={[round(value, 3) for value in hidden]}, "
@@ -100,4 +117,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

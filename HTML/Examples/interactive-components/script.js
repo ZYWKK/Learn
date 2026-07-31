@@ -5,9 +5,16 @@ tabs.forEach((tab) => {
   tab.addEventListener("click", () => {
     tabs.forEach((item) => item.classList.remove("active"));
     tabContents.forEach((item) => item.classList.remove("active"));
+    tabs.forEach((item) => item.setAttribute("aria-selected", "false"));
+    tabContents.forEach((item) => {
+      item.hidden = true;
+    });
 
     tab.classList.add("active");
-    document.getElementById(tab.dataset.tab).classList.add("active");
+    tab.setAttribute("aria-selected", "true");
+    const activeContent = document.getElementById(tab.dataset.tab);
+    activeContent.hidden = false;
+    activeContent.classList.add("active");
   });
 });
 
@@ -16,7 +23,9 @@ const faqQuestions = document.querySelectorAll(".faq-question");
 faqQuestions.forEach((question) => {
   question.addEventListener("click", () => {
     const answer = question.nextElementSibling;
-    answer.classList.toggle("open");
+    const isOpen = answer.classList.toggle("open");
+    answer.hidden = !isOpen;
+    question.setAttribute("aria-expanded", String(isOpen));
   });
 });
 
@@ -40,4 +49,3 @@ showToastButton.addEventListener("click", () => {
     toast.classList.remove("show");
   }, 1800);
 });
-

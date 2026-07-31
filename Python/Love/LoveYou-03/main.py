@@ -196,4 +196,5 @@ def main():
     page2()  # 显示最后一个画面
     turtle.done()  # 完成绘图，保持窗口开启
 
-main()  # 调用主函数
+if __name__ == '__main__':
+    main()

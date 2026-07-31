@@ -13,7 +13,7 @@ def scrape_data(url):
     """
     try:
         # 发送HTTP GET请求到指定的URL
-        response = requests.get(url)
+        response = requests.get(url, timeout=10)
         # 检查请求是否成功（状态码200）
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
@@ -23,7 +23,7 @@ def scrape_data(url):
 
     # 使用BeautifulSoup解析获取到的HTML文本，使用'html.parser'作为解析器
     soup = BeautifulSoup(response.text, 'html.parser')
-    
+
     # 在此处添加从网站提取相关数据的代码
     # 例如，可以提取所有的段落文本：
     # paragraphs = soup.find_all('p')

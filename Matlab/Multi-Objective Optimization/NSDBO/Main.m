@@ -11,7 +11,7 @@ clc;          % 清空命令窗口
 
 %% 设置测试问题
 TestProblem = 31;                % 测试问题编号（范围1-47）
-MultiObj = GetFunInfo(TestProblem); % 获取测试问题的详细信息
+MultiObj = GetFuninfo(TestProblem); % 获取测试问题的详细信息
 MultiObjFnc = MultiObj.name;     % 获取测试问题的名称
 
 %% 设置算法参数

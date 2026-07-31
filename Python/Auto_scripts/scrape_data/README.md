@@ -1,5 +1,8 @@
 # 网页数据抓取
 
+> [!IMPORTANT]
+> 当前脚本已设置请求超时。请遵守目标网站规则，并先看 [统一运行与安全说明](../STANDARDIZED_USAGE.md)；代码以 [scrape_data.py](scrape_data.py) 为准。
+
 ### **脚本功能说明**
 
 这个Python脚本的主要功能是**从指定的URL抓取网页内容，并使用BeautifulSoup解析HTML结构**。具体来说，它发送一个HTTP GET请求到目标网站，获取网页的HTML内容，然后使用BeautifulSoup将HTML解析为可操作的对象，最后提取并打印网页的标题。
@@ -22,7 +25,7 @@ def scrape_data(url):
     """
     try:
         # 发送HTTP GET请求到指定的URL
-        response = requests.get(url)
+        response = requests.get(url, timeout=10)
         # 检查请求是否成功（状态码200）
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
@@ -76,13 +79,13 @@ if __name__ == "__main__":
 3. **发送HTTP GET请求并处理响应**
     ```python
     try:
-        response = requests.get(url)
+            response = requests.get(url, timeout=10)
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
         print(f"请求失败: {e}")
         return None
     ```
-    - 使用 `requests.get(url)` 发送HTTP GET请求。
+    - 使用 `requests.get(url, timeout=10)` 发送HTTP GET请求，并限制等待时间。
     - `response.raise_for_status()` 检查请求是否成功（状态码200）。如果不是，抛出异常。
     - 使用 `try-except` 块捕捉可能发生的异常，如网络错误、无效URL等，并打印错误信息。
 
@@ -167,7 +170,7 @@ if __name__ == "__main__":
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36'
         }
-        response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, timeout=10)
         ```
 
 4. **异常处理**

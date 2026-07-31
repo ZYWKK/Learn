@@ -1,6 +1,6 @@
 import random  # 导入随机数生成库
 from math import sin, cos, pi, log  # 导入数学库中的三角函数和对数
-from tkinter import *  # 导入Tkinter库用于创建图形用户界面
+from tkinter import Canvas, Tk  # 导入需要的Tkinter组件
 
 # 画布的宽和高
 CANVAS_WIDTH = 640  # 画布的宽
@@ -60,11 +60,12 @@ def shrink(x, y, ratio):
     :return: 新坐标 (x, y)
     """
     # 计算力的影响
-    force = -1 / (((x - CANVAS_CENTER_X) ** 2 + (y - CANVAS_CENTER_Y) ** 2) ** 0.6)  # 使用魔法参数
+    distance = (x - CANVAS_CENTER_X) ** 2 + (y - CANVAS_CENTER_Y) ** 2
+    force = -1 / (distance**0.6)  # 使用魔法参数
     # 计算新的坐标偏移量
     dx = ratio * force * (x - CANVAS_CENTER_X)
     dy = ratio * force * (y - CANVAS_CENTER_Y)
-    
+
     return x - dx, y - dy  # 返回新的坐标
 
 def curve(p):
@@ -79,7 +80,7 @@ class Heart:
     """
     爱心类
     """
-    
+
     def __init__(self, generate_frame=20):
         self._points = set()  # 原始爱心坐标集合
         self._edge_diffusion_points = set()  # 边缘扩散效果点坐标集合
@@ -125,11 +126,12 @@ class Heart:
         :param ratio: 缩放比例
         :return: 新坐标 (x, y)
         """
-        force = 1 / (((x - CANVAS_CENTER_X) ** 2 + (y - CANVAS_CENTER_Y) ** 2) ** 0.520)  # 魔法参数
+        distance = (x - CANVAS_CENTER_X) ** 2 + (y - CANVAS_CENTER_Y) ** 2
+        force = 1 / (distance**0.520)  # 魔法参数
         # 计算新的坐标偏移量
         dx = ratio * force * (x - CANVAS_CENTER_X) + random.randint(-1, 1)
         dy = ratio * force * (y - CANVAS_CENTER_Y) + random.randint(-1, 1)
-        
+
         return x - dx, y - dy  # 返回新的坐标
 
     def calc(self, generate_frame):
@@ -182,7 +184,14 @@ class Heart:
         :param render_frame: 当前帧数
         """
         for x, y, size in self.all_points[render_frame % self.generate_frame]:
-            render_canvas.create_rectangle(x, y, x + size, y + size, width=0, fill=HEART_COLOR)  # 绘制矩形
+            render_canvas.create_rectangle(
+                x,
+                y,
+                x + size,
+                y + size,
+                width=0,
+                fill=HEART_COLOR,
+            )
 
 def draw(main: Tk, render_canvas: Canvas, render_heart: Heart, render_frame=0):
     """

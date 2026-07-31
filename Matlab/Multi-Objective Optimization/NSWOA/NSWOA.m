@@ -88,6 +88,7 @@ end
 
 % 返回最终种群
 f = Whale_pos;
+end
 
 %% 边界处理函数
 function a = bound(a, ub, lb)

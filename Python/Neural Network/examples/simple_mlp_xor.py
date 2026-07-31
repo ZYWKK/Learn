@@ -67,15 +67,21 @@ def main():
             hidden_deltas = []
             for neuron_index in range(2):
                 hidden_error = output_delta * output_weights[neuron_index]
-                hidden_deltas.append(hidden_error * sigmoid_derivative(hidden_outputs[neuron_index]))
+                derivative = sigmoid_derivative(hidden_outputs[neuron_index])
+                hidden_deltas.append(hidden_error * derivative)
 
             for neuron_index in range(2):
-                output_weights[neuron_index] += learning_rate * output_delta * hidden_outputs[neuron_index]
+                gradient = output_delta * hidden_outputs[neuron_index]
+                output_weights[neuron_index] += learning_rate * gradient
             output_bias += learning_rate * output_delta
 
             for neuron_index in range(2):
-                hidden_weights[neuron_index][0] += learning_rate * hidden_deltas[neuron_index] * inputs[0]
-                hidden_weights[neuron_index][1] += learning_rate * hidden_deltas[neuron_index] * inputs[1]
+                hidden_weights[neuron_index][0] += (
+                    learning_rate * hidden_deltas[neuron_index] * inputs[0]
+                )
+                hidden_weights[neuron_index][1] += (
+                    learning_rate * hidden_deltas[neuron_index] * inputs[1]
+                )
                 hidden_biases[neuron_index] += learning_rate * hidden_deltas[neuron_index]
 
         if (epoch + 1) % 1000 == 0:
@@ -95,9 +101,11 @@ def main():
         output_total += hidden_outputs[1] * output_weights[1]
         prediction = sigmoid(output_total)
 
-        print(f"{inputs} -> predicted={prediction:.3f}, rounded={round(prediction)}, target={int(target)}")
+        print(
+            f"{inputs} -> predicted={prediction:.3f}, "
+            f"rounded={round(prediction)}, target={int(target)}"
+        )
 
 
 if __name__ == "__main__":
     main()
-

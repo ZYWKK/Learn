@@ -1,5 +1,8 @@
 # 统计文本单词数量
 
+> [!IMPORTANT]
+> 本页保留原始逐行讲解；当前脚本明确使用 UTF-8。请先看 [统一运行与安全说明](../STANDARDIZED_USAGE.md)，并以 [count_words.py](count_words.py) 为准。
+
 ### **脚本功能说明**
 
 这个Python脚本的主要功能是**统计指定文件中的单词总数**。具体步骤如下：

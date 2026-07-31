@@ -9,7 +9,7 @@ def count_words(file_path):
     int: 文件中的单词总数。
     """
     # 使用 'with' 语句打开文件，确保文件使用后自动关闭
-    with open(file_path, 'r') as f:
+    with open(file_path, 'r', encoding='utf-8') as f:
         text = f.read()  # 读取文件的全部内容
 
     # 使用 split() 方法将文本按空格拆分为单词列表

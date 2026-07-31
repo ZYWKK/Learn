@@ -1,5 +1,8 @@
 # 批量下载图片
 
+> [!IMPORTANT]
+> 本页保留原始逐行讲解；实际下载前请先看 [统一运行与安全说明](../STANDARDIZED_USAGE.md)，并以 [download_images.py](download_images.py) 为准。
+
 ### **脚本功能说明**
 
 这个Python脚本的主要功能是**从指定的API端点获取图片URL列表，并将这些图片下载到指定的本地目录**。具体步骤如下：
@@ -24,7 +27,7 @@ def download_images(url, save_directory):
     """
     try:
         # 发送HTTP GET请求到指定的API URL
-        response = requests.get(url)
+        response = requests.get(url, timeout=10)
         # 检查请求是否成功（状态码200）
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
@@ -53,7 +56,7 @@ def download_images(url, save_directory):
     for index, image_url in enumerate(images):
         try:
             # 发送HTTP GET请求下载图片
-            image_response = requests.get(image_url)
+            image_response = requests.get(image_url, timeout=10)
             # 检查图片请求是否成功
             image_response.raise_for_status()
         except requests.exceptions.RequestException as e:
@@ -104,13 +107,13 @@ if __name__ == "__main__":
 3. **发送HTTP GET请求并处理响应**
     ```python
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=10)
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
         print(f"请求失败: {e}")
         return
     ```
-    - 使用 `requests.get(url)` 发送HTTP GET请求到指定的API URL。
+    - 使用 `requests.get(url, timeout=10)` 请求 API，并限制等待时间。
     - `response.raise_for_status()` 检查请求是否成功（状态码200）。如果不是，抛出异常。
     - 使用 `try-except` 块捕捉可能发生的异常，如网络错误、无效URL等，并打印错误信息。
 
@@ -143,7 +146,7 @@ if __name__ == "__main__":
     ```python
     for index, image_url in enumerate(images):
         try:
-            image_response = requests.get(image_url)
+            image_response = requests.get(image_url, timeout=10)
             image_response.raise_for_status()
         except requests.exceptions.RequestException as e:
             print(f"下载图片失败: {image_url}. 错误: {e}")
@@ -160,7 +163,7 @@ if __name__ == "__main__":
     - 使用 `enumerate(images)` 遍历图片URL列表，同时获取每个URL的索引。
     - 对于每个图片URL：
         1. **发送HTTP GET请求下载图片内容**：
-            - 使用 `requests.get(image_url)` 下载图片。
+    - 使用 `requests.get(image_url, timeout=10)` 下载图片。
             - 检查请求是否成功，若失败则打印错误信息并跳过当前图片。
         2. **构建图片的保存路径**：
             - 使用 `os.path.join` 将保存目录和图片名拼接成完整路径，命名格式为 `image_索引.jpg`。
@@ -223,7 +226,7 @@ if __name__ == "__main__":
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
         }
-        response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, timeout=10)
         ```
 
 7. **支持多种图片格式**

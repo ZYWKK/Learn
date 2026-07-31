@@ -1,5 +1,8 @@
 # 图片文字识别
 
+> [!IMPORTANT]
+> 本页保留原始逐行讲解；实际运行前请先看 [统一运行与安全说明](../STANDARDIZED_USAGE.md)，并以 [recognize_text.py](recognize_text.py) 为准。
+
 ### **脚本功能说明**
 
 这个Python脚本的主要功能是**从图像文件中提取文本**。它使用 `PIL`（Pillow）库来打开图像，使用 `pytesseract` 进行光学字符识别 (OCR) 来提取图像中的文本。具体步骤如下：

@@ -1,5 +1,8 @@
 # SQLite 查询执行
 
+> [!IMPORTANT]
+> 本页保留原始逐行讲解；实际查询前请先看 [统一运行与安全说明](../STANDARDIZED_USAGE.md)，并以 [execute_query.py](execute_query.py) 为准。
+
 ### **脚本功能说明**
 
 这个Python脚本的主要功能是**连接到SQLite数据库并执行SQL查询**。它使用 `sqlite3` 库来连接到数据库，创建游标对象，用于执行查询并返回查询结果。具体步骤如下：

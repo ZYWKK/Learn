@@ -184,7 +184,7 @@ end
 % 输出:
 %   MultiObj - 结构体，包含测试问题的各种信息
 
-function MultiObj = GetFunInfo(TestProblem) % 46个多目标测试函数
+function MultiObj = GetFuninfo(TestProblem) % 46个多目标测试函数
     dynamic = 0;  % 是否为动态优化问题，0表示静态
 
     switch TestProblem
@@ -808,7 +808,7 @@ end
 ```
 
 **注释说明：**
-- **函数功能**：`GetFunInfo` 函数根据输入的测试问题编号，返回相应多目标优化问题的详细信息，包括变量维数、目标数、变量范围、成本函数、真实Pareto前沿等。
+- **函数功能**：`GetFuninfo` 函数根据输入的测试问题编号，返回相应多目标优化问题的详细信息，包括变量维数、目标数、变量范围、成本函数、真实Pareto前沿等。
 - **参数说明**：
   - `TestProblem`：测试问题的编号，范围为1到47，对应不同的多目标测试函数。
 - **输出说明**：
@@ -1466,7 +1466,7 @@ clc;          % 清空命令窗口
 
 %% 设置测试问题
 TestProblem = 31;                % 测试问题编号（范围1-47）
-MultiObj = GetFunInfo(TestProblem); % 获取测试问题的详细信息
+MultiObj = GetFuninfo(TestProblem); % 获取测试问题的详细信息
 MultiObjFnc = MultiObj.name;     % 获取测试问题的名称
 
 %% 设置算法参数
@@ -1514,7 +1514,7 @@ disp('Repository particles positions are stored in X');
   1. **初始化环境**：
      - 关闭所有图形窗口，清除工作区变量，并清空命令窗口，确保程序在一个干净的环境中运行。
   2. **设置测试问题**：
-     - 选择一个测试问题编号（范围1-47），通过 `GetFunInfo` 函数获取该测试问题的详细信息，包括目标函数数量、决策变量维数、变量范围、真实Pareto前沿等。
+- 选择一个测试问题编号（范围1-47），通过 `GetFuninfo` 函数获取该测试问题的详细信息，包括目标函数数量、决策变量维数、变量范围、真实Pareto前沿等。
   3. **设置算法参数**：
      - 定义种群规模（`Np`）、仓库规模（`Nr`）和最大代数（`maxgen`）等参数。
      - 获取目标函数个数和决策变量维数。

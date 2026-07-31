@@ -6,7 +6,10 @@ $ErrorActionPreference = 'Stop'
 
 $rootPath = (Resolve-Path -LiteralPath $Root).Path
 $markdownFiles = Get-ChildItem -LiteralPath $rootPath -Recurse -File -Filter '*.md' |
-    Where-Object { $_.FullName -notmatch '\\.git\\' }
+    Where-Object {
+        $_.FullName -notmatch '\\.(git|agents|codex)\\' -and
+        $_.Name -ne 'AGENTS.md'
+    }
 
 $brokenLinks = New-Object System.Collections.Generic.List[string]
 $unclosedFences = New-Object System.Collections.Generic.List[string]

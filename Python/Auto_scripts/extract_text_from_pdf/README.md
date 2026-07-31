@@ -1,18 +1,21 @@
 # 提取 PDF 文本
 
+> [!IMPORTANT]
+> 本页保留原始逐行讲解；当前脚本已改用新版 PyPDF2 API。请先看 [统一运行与安全说明](../STANDARDIZED_USAGE.md)，并以 [extract_text_from_pdf.py](extract_text_from_pdf.py) 为准。
+
 ### **脚本功能说明**
 
 这个Python脚本的主要功能是**从PDF文件中提取文本**。它使用 `PyPDF2` 库打开并读取指定的PDF文件，逐页提取文本内容，并将所有文本合并成一个字符串后返回。具体步骤如下：
 
-1. **打开PDF文件**：以只读二进制模式打开指定路径的PDF文件。
-2. **读取PDF文件**：使用 `PyPDF2.PdfFileReader` 对象来读取PDF文件，并获取每一页的文本内容。
+1. **打开PDF文件**：把文件路径交给 `PdfReader`。
+2. **读取PDF文件**：使用 `PdfReader` 获取页面集合。
 3. **提取文本**：遍历所有页面，提取每页的文本并将它们拼接在一起。
 4. **返回提取的文本**：将合并后的完整文本返回。
 
 ### **带注释的Python脚本**
 
 ```python
-import PyPDF2  # 导入 PyPDF2 库，用于处理 PDF 文件
+from PyPDF2 import PdfReader  # 导入当前版本的 PDF 读取器
 
 # 从 PDF 文件中提取文本的函数
 def extract_text_from_pdf(pdf_path):
@@ -25,15 +28,12 @@ def extract_text_from_pdf(pdf_path):
     返回:
     str: 提取出的文本内容。
     """
-    # 以只读二进制模式打开 PDF 文件
-    with open(pdf_path, 'rb') as file:
-        reader = PyPDF2.PdfFileReader(file)  # 创建 PdfFileReader 对象，读取 PDF 文件内容
-        text = ''  # 用于存储提取的文本
+    reader = PdfReader(pdf_path)
+    text = ''  # 用于存储提取的文本
 
-        # 遍历 PDF 文件的每一页，提取文本
-        for page_num in range(reader.numPages):
-            page = reader.getPage(page_num)  # 获取第 page_num 页的内容
-            text += page.extractText()  # 提取该页的文本并添加到 text 中
+    # 遍历 PDF 文件的每一页，提取文本
+    for page in reader.pages:
+        text += page.extract_text() or ''
 
     return text  # 返回所有提取的文本内容
 
@@ -49,7 +49,7 @@ if __name__ == "__main__":
 
 1. **导入必要的模块**
     ```python
-    import PyPDF2
+    from PyPDF2 import PdfReader
     ```
     - `PyPDF2` 是一个处理PDF文件的Python库，这里用它来读取PDF文件并提取其中的文本内容。
 
@@ -59,20 +59,18 @@ if __name__ == "__main__":
         """
         从指定的 PDF 文件中提取文本。
         """
-        with open(pdf_path, 'rb') as file:
-            reader = PyPDF2.PdfFileReader(file)
-            text = ''
-            for page_num in range(reader.numPages):
-                page = reader.getPage(page_num)
-                text += page.extractText()
+        reader = PdfReader(pdf_path)
+        text = ''
+        for page in reader.pages:
+            text += page.extract_text() or ''
         return text
     ```
     - **参数**：
         - `pdf_path`：PDF文件的路径（字符串）。
     - **功能**：
-        - 使用 `open(pdf_path, 'rb')` 以只读二进制模式打开PDF文件。
-        - 创建 `PdfFileReader` 对象，用于读取PDF文件的内容。
-        - 遍历所有页码，使用 `getPage(page_num)` 获取每一页的内容，并调用 `extractText()` 提取该页的文本。
+        - 使用 `PdfReader(pdf_path)` 打开PDF文件。
+        - 通过 `reader.pages` 获取页面集合。
+        - 遍历页面并调用 `page.extract_text()`；页面没有文本层时用空字符串代替 `None`。
         - 将所有提取的文本拼接在一起并返回。
 
 3. **使用示例**
@@ -101,7 +99,7 @@ if __name__ == "__main__":
     ```
 
 3. **PDF页面的编码问题**
-    - `PyPDF2` 使用 `extractText()` 提取文本，但对某些PDF文件可能不支持，导致提取失败或返回空字符串。如果需要更好的兼容性，可以尝试使用 `pdfminer`：
+    - `PyPDF2` 使用 `extract_text()` 提取文本，但扫描版PDF可能没有文本层。如果需要更复杂的版面分析，可以尝试使用 `pdfminer.six`；扫描件通常还需要 OCR：
     ```python
     from pdfminer.high_level import extract_text
 
@@ -138,14 +136,12 @@ if __name__ == "__main__":
         返回:
         str: 提取的文本内容。
         """
-        with open(pdf_path, 'rb') as file:
-            reader = PyPDF2.PdfFileReader(file)
-            if reader.isEncrypted:
-                reader.decrypt(password)  # 解密 PDF 文件
-            text = ''
-            for page_num in range(reader.numPages):
-                page = reader.getPage(page_num)
-                text += page.extractText()
+        reader = PdfReader(pdf_path)
+        if reader.is_encrypted:
+            reader.decrypt(password)  # 解密 PDF 文件
+        text = ''
+        for page in reader.pages:
+            text += page.extract_text() or ''
         return text
 
     # 使用示例
@@ -186,15 +182,13 @@ if __name__ == "__main__":
         返回:
         str: 提取的文本内容。
         """
-        with open(pdf_path, 'rb') as file:
-            reader = PyPDF2.PdfFileReader(file)
-            text = ''
-            for page_num in page_numbers:
-                if page_num < reader.numPages:
-                    page = reader.getPage(page_num)
-                    text += page.extractText()
-                else:
-                    print(f"Page number {page_num} is out of range.")
+        reader = PdfReader(pdf_path)
+        text = ''
+        for page_num in page_numbers:
+            if 0 <= page_num < len(reader.pages):
+                text += reader.pages[page_num].extract_text() or ''
+            else:
+                print(f"Page number {page_num} is out of range.")
         return text
 
     # 使用示例
@@ -226,6 +220,6 @@ if __name__ == "__main__":
 
 ### **总结**
 
-这个脚本是一个简单实用的工具，用于从PDF文件中提取文本。通过使用 `PyPDF2` 库的 `PdfFileReader` 对象，它可以逐页提取PDF中的文本内容并将其合并成一个字符串。然而，`PyPDF2` 在处理一些复杂的PDF（如包含多列排版、图片和表格）时，提取的文本可能不准确。如果需要更精确的文本提取，建议使用其他库如 `pdfminer.six`。
+这个脚本是一个简单实用的工具，用于从PDF文件中提取文本。通过使用 `PyPDF2` 的 `PdfReader` 和 `page.extract_text()`，它可以逐页提取文本并合并成一个字符串。然而，复杂排版、图片和扫描件的结果可能不准确；这类文件可以继续了解 `pdfminer.six` 或 OCR。
 
 在扩展功能方面，可以处理加密的PDF文件、保存提取的文本到文件、提取特定页面的内容、批量处理多个PDF文件等，以增强其实用性。此外，结合其他Python工具，您还可以进一步对提取的文本进行分析和处理。

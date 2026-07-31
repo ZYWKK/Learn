@@ -51,6 +51,7 @@
 - [新手常见问题排查手册](docs/TROUBLESHOOTING.md)
 - [学习记录模板](docs/STUDY_NOTES_TEMPLATE.md)
 - [文档整理规范](docs/STYLE_GUIDE.md)
+- [示例代码规范](docs/CODE_STYLE.md)
 
 ### 常用教程
 
@@ -95,6 +96,7 @@
 
 - [Python 自动化脚本索引](Python/Auto_scripts/README.md)
 - [Python 自动化脚本依赖总览](Python/Auto_scripts/DEPENDENCIES.md)
+- [Python 自动化脚本统一运行与安全说明](Python/Auto_scripts/STANDARDIZED_USAGE.md)
 - [Python 神经网络示例](<Python/Neural Network/README.md>)
 - [Python 神经网络模型选择指南](<Python/Neural Network/MODEL_SELECTION.md>)
 - [Python 多目标优化示例](<Python/Multi-Objective Optimization/README.md>)
@@ -102,6 +104,7 @@
 - [Markdown 示例与模板](Markdown/examples/README.md)
 - [README 模板](Markdown/examples/readme-template.md)
 - [文档维护者指南](scripts/MAINTAINER_GUIDE.md)
+- [代码与文档检查脚本](scripts/README.md)
 
 ## 目录概览
 
@@ -115,7 +118,7 @@ Learn/
 ├── Matlab/          Matlab 基础、优化算法、神经网络案例
 ├── Mathematica/     Mathematica / Wolfram Language 教程
 ├── docs/            仓库级学习路线、练习题和文档规范
-└── scripts/         文档检查脚本
+└── scripts/         代码与文档检查脚本
 ```
 
 ## 各目录说明
@@ -193,7 +196,7 @@ Learn/
 - [Grab](Python/Grab/README.md)：图片抓取示例
 - [Love](Python/Love/README.md)：Python 图形小程序示例
 
-自动化脚本涉及文件整理、网站检测、批量重命名、PDF 文本提取、Excel 处理、图片处理、邮件发送等场景。运行前建议先看 [依赖总览](Python/Auto_scripts/DEPENDENCIES.md)。
+自动化脚本涉及文件整理、网站检测、批量重命名、PDF 文本提取、Excel 处理、图片处理、邮件发送等场景。运行前建议先看 [依赖总览](Python/Auto_scripts/DEPENDENCIES.md) 和 [统一运行与安全说明](Python/Auto_scripts/STANDARDIZED_USAGE.md)。
 
 ### HTML
 
@@ -229,17 +232,19 @@ Learn/
 
 ## 文档维护
 
-维护文档时，可以运行：
+提交前建议依次运行代码检查和文档检查：
 
 ```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\check-code.ps1
 powershell -ExecutionPolicy Bypass -File .\scripts\check-docs.ps1
 ```
 
 相关维护文档：
 
 - [文档整理规范](docs/STYLE_GUIDE.md)
+- [示例代码规范](docs/CODE_STYLE.md)
 - [文档维护者指南](scripts/MAINTAINER_GUIDE.md)
-- [文档检查脚本说明](scripts/README.md)
+- [代码与文档检查脚本说明](scripts/README.md)
 - [更新日志](CHANGELOG.md)
 
 ## 使用提醒

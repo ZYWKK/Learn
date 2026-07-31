@@ -1,5 +1,8 @@
 # 检查网站状态
 
+> [!IMPORTANT]
+> 本页保留原始逐行讲解；当前脚本已增加请求超时。请先看 [统一运行与安全说明](../STANDARDIZED_USAGE.md)，并以 [check_website_status.py](check_website_status.py) 为准。
+
 ### **脚本功能说明**
 
 这个Python脚本的主要功能是**检查指定网站的状态，以判断网站是否可以正常访问**。它使用 `requests` 库来发送HTTP请求，检查返回的状态码，并输出相应的结果。具体步骤如下：
@@ -23,7 +26,7 @@ def check_website_status(url):
     """
     try:
         # 发送 GET 请求到指定 URL
-        response = requests.get(url)
+        response = requests.get(url, timeout=10)
 
         # 检查响应的状态码
         if response.status_code == 200:
@@ -56,7 +59,7 @@ if __name__ == "__main__":
         检查指定网站的状态，并输出相应信息。
         """
         try:
-            response = requests.get(url)
+            response = requests.get(url, timeout=10)
             if response.status_code == 200:
                 print(f"Website {url} is up and running.")
             else:
@@ -67,7 +70,7 @@ if __name__ == "__main__":
     - **参数**：
         - `url`：要检查的网站URL（字符串）。
     - **功能**：
-        - 使用 `requests.get(url)` 对指定URL发送HTTP GET请求。
+    - 使用 `requests.get(url, timeout=10)` 对指定URL发送HTTP GET请求，并限制等待时间。
         - **状态码检查**：
           - 如果响应的状态码是200，则表示网站运行正常。
           - 如果响应的状态码不是200，则打印状态码，以指示可能存在的问题。
@@ -165,7 +168,7 @@ if __name__ == "__main__":
         url (str): 要检查的网站的 URL。
         """
         try:
-            response = requests.get(url)
+            response = requests.get(url, timeout=10)
             if response.status_code == 200:
                 logging.info(f"Website {url} is up and running.")
             else:
@@ -183,7 +186,7 @@ if __name__ == "__main__":
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36'
     }
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, timeout=10)
     ```
 
 4. **定期检查网站状态**
@@ -211,12 +214,13 @@ if __name__ == "__main__":
 5. **发送通知**
     - 在检测到网站不可用时，可以添加功能通过电子邮件或短信发送通知。
     ```python
+    import os
     import smtplib
     from email.mime.text import MIMEText
 
     def send_alert_email(subject, body, recipient_email):
-        sender_email = 'your_email@gmail.com'
-        sender_password = 'your_password'
+        sender_email = os.getenv('SMTP_SENDER')
+        sender_password = os.getenv('SMTP_PASSWORD')
         message = MIMEText(body)
         message['Subject'] = subject
         message['From'] = sender_email

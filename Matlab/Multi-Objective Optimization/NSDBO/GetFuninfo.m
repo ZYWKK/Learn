@@ -5,7 +5,7 @@
 % 输出:
 %   MultiObj - 结构体，包含测试问题的各种信息
 
-function MultiObj = GetFunInfo(TestProblem) % 46个多目标测试函数
+function MultiObj = GetFuninfo(TestProblem) % 46个多目标测试函数
     dynamic = 0;  % 是否为动态优化问题，0表示静态
 
     switch TestProblem

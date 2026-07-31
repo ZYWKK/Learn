@@ -9,7 +9,7 @@ def _append_failure(log_path, message):
 def download_images(url, save_directory, failure_log_path=None):
     """
     从指定的API获取图片URL列表并下载图片到本地目录。
-    
+
     参数:
     url (str): API的URL地址，假设返回一个包含图片URL的JSON数组。
     save_directory (str): 图片保存的本地目录路径。
@@ -60,6 +60,11 @@ def download_images(url, save_directory, failure_log_path=None):
 
         # 构建图片的保存路径，格式为 image_索引.jpg
         image_path = os.path.join(save_directory, f"image_{index}.jpg")
+        if os.path.exists(image_path):
+            print(f"跳过已存在的文件: {image_path}")
+            _append_failure(failure_log_path, f"SKIPPED_EXISTS\t{image_url}\t{image_path}")
+            continue
+
         try:
             # 以二进制写入模式打开文件并保存图片内容
             with open(image_path, "wb") as f:

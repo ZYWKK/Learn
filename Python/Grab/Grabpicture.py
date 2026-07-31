@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# @Time : 2022/7/6 15:36 
+# @Time : 2022/7/6 15:36
 # @Author : XXXXXX
 # @File : Crawl_picture
 # @Project: Crawl_picture
@@ -7,11 +7,11 @@
 # 源码是在CSDN上找的一个大佬的，时间很长了
 # 注意：里面的一些信息请自行修改！
 
-import re  # 导入正则表达式模块，用于处理字符串
-import requests  # 导入requests模块，用于发送HTTP请求
-from urllib import error  # 从urllib中导入错误处理模块
-from bs4 import BeautifulSoup  # 从bs4导入BeautifulSoup，用于解析HTML
 import os  # 导入os模块，用于处理文件和目录
+import re  # 导入正则表达式模块，用于处理字符串
+
+import requests  # 导入requests模块，用于发送HTTP请求
+from bs4 import BeautifulSoup  # 从bs4导入BeautifulSoup，用于解析HTML
 
 # 定义全局变量
 num = 0  # 已下载的图片数量
@@ -31,7 +31,7 @@ def Find(url, A):
         try:
             # 尝试发送请求获取当前页内容
             Result = A.get(Url, timeout=7, allow_redirects=False)
-        except BaseException:
+        except requests.RequestException:
             t = t + 60  # 如果请求失败，增加页码并继续
             continue
         else:
@@ -51,25 +51,26 @@ def recommend(url):
     Re = []  # 存储推荐的关键词
     try:
         # 尝试发送请求获取相关推荐
-        html = requests.get(url, allow_redirects=False)
-    except error.HTTPError as e:
-        return  # 如果请求失败，返回空
+        html = requests.get(url, timeout=7, allow_redirects=False)
+        html.raise_for_status()
+    except requests.RequestException:
+        return Re  # 如果请求失败，返回空列表
     else:
         html.encoding = 'utf-8'  # 设置编码
         bsObj = BeautifulSoup(html.text, 'html.parser')  # 解析HTML
         div = bsObj.find('div', id='topRS')  # 找到推荐关键词的div
         if div is not None:
-            listA = div.findAll('a')  # 找到所有的链接
+            listA = div.find_all('a')  # 找到所有的链接
             for i in listA:
                 if i is not None:
                     Re.append(i.get_text())  # 添加推荐关键词到列表
         return Re  # 返回推荐关键词列表
 
 # 下载图片的函数
-def dowmloadPicture(html, keyword):
+def download_picture(html, keyword):
     global num  # 使用全局变量num
     # 使用正则表达式找到图片的URL
-    pic_url = re.findall('"objURL":"(.*?)",', html, re.S)  
+    pic_url = re.findall('"objURL":"(.*?)",', html, re.S)
     print('找到关键词:' + keyword + '的图片，即将开始下载图片...')  # 提示用户开始下载
     for each in pic_url:  # 遍历找到的每个图片URL
         print('正在下载第' + str(num + 1) + '张图片，图片地址:' + str(each))  # 提示正在下载的图片信息
@@ -77,17 +78,17 @@ def dowmloadPicture(html, keyword):
             if each is not None:
                 # 尝试下载图片
                 pic = requests.get(each, timeout=7)
+                pic.raise_for_status()
             else:
                 continue  # 如果URL为空，继续下一个
-        except BaseException:
+        except requests.RequestException:
             print('错误，当前图片无法下载')  # 下载失败的提示
             continue
         else:
             # 构建图片保存路径
-            string = file + r'\\' + keyword + '_' + str(num) + '.jpg'
-            fp = open(string, 'wb')  # 以二进制写入模式打开文件
-            fp.write(pic.content)  # 写入图片内容
-            fp.close()  # 关闭文件
+            string = os.path.join(file, f'{keyword}_{num}.jpg')
+            with open(string, 'wb') as image_file:
+                image_file.write(pic.content)
             num += 1  # 增加已下载图片计数
         if num >= numPicture:  # 如果达到用户要求的下载数量
             return  # 结束下载
@@ -106,7 +107,7 @@ if __name__ == '__main__':
     A = requests.Session()  # 创建一个会话对象
     A.headers = headers  # 设置请求头
     ###############################
-    
+
     # 提示用户输入搜索关键词
     word = input("请输入搜索关键词(可以是人名，地名等): ")
     url = 'https://image.baidu.com/search/flip?tn=baiduimage&ie=utf-8&word=' + word + '&pn='
@@ -116,14 +117,10 @@ if __name__ == '__main__':
     Recommend = recommend(url)  # 获取相关推荐
     print('经过检测%s类图片共有%d张' % (word, tot))  # 输出找到的图片数量
     numPicture = int(input('请输入想要下载的图片数量 '))  # 提示用户输入下载数量
-    file = input('请建立一个存储图片的文件夹，输入文件夹名称即可')  # 提示用户输入存储文件夹名称
-    y = os.path.exists(file)  # 检查文件夹是否存在
-    if y == 1:
-        print('该文件已存在，请重新输入')  # 如果文件夹已存在，提示用户重新输入
-        file = input('请建立一个存储图片的文件夹，)输入文件夹名称即可')
-        os.mkdir(file)  # 创建新文件夹
-    else:
-        os.mkdir(file)  # 创建文件夹
+    file = input('请输入用于保存图片的文件夹路径: ')
+    if os.path.isdir(file) and os.listdir(file):
+        raise SystemExit('目标文件夹不是空文件夹。为避免覆盖，请换一个目录。')
+    os.makedirs(file, exist_ok=True)
     t = 0  # 图片计数器
     tmp = url  # 保存原始URL以便后续使用
     while t < numPicture:  # 循环直到下载所需数量
@@ -131,11 +128,11 @@ if __name__ == '__main__':
             url = tmp + str(t)  # 生成当前页的URL
             result = A.get(url, timeout=10, allow_redirects=False)  # 获取当前页内容
 
-        except error.HTTPError as e:
+        except requests.RequestException:
             print('网络错误，请调整网络后重试')  # 网络错误提示
             t = t + 60  # 页码增加
         else:
-            dowmloadPicture(result.text, word)  # 下载图片
+            download_picture(result.text, word)  # 下载图片
             t = t + 60  # 页码增加
     print('当前搜索结束，感谢使用')  # 提示用户搜索结束
     print('猜你喜欢')  # 提示用户相关推荐

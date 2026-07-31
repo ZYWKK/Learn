@@ -2,6 +2,21 @@
 
 这个文件记录仓库中比较重要的文档结构调整，方便以后回看每一轮优化做了什么。
 
+## 2026-07-31
+
+### 新增
+
+- 新增仓库级 `.editorconfig`、`.gitattributes` 和 `.gitignore`，统一 UTF-8、换行、缩进与常见生成文件忽略规则。
+- 新增 [示例代码规范](docs/CODE_STYLE.md)、[代码检查脚本](scripts/check-code.ps1) 和无第三方依赖的 Python 静态检查器。
+- 新增 [Python 自动化脚本统一运行与安全说明](Python/Auto_scripts/STANDARDIZED_USAGE.md)，说明预演模式、环境变量和标准化后的安全默认值。
+
+### 优化
+
+- 标准化 Python 示例：补充网络超时和 UTF-8 编码，移除通配符导入，更新 PyPDF2/Pillow API，并整理过长表达式。
+- 加固批量脚本：文本替换、重命名、空目录清理和文件分类默认只预演，Excel 去重默认保留原文件，账号凭证改从环境变量读取。
+- 修正 HTML 示例的语言、viewport、图片替代文本、按钮类型、交互状态和 CSS 注释写法。
+- 修复 Matlab 函数文件名与主函数名不一致的问题，并使用 Matlab Code Analyzer 完成全目录静态扫描。
+
 ## 2026-06-23
 
 ### 新增

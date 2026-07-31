@@ -320,11 +320,11 @@ end
 
 ---
 
-### 3. `HandleFulArchive.m`
+### 3. `HandleFullArchive.m`
 
 ```matlab
 % -------------------------------------------------------------
-% 文件名: HandleFulArchive.m
+% 文件名: HandleFullArchive.m
 % 功能: 处理当存档（Archive）满时，通过轮盘赌选择策略移除部分个体
 %       该函数根据个体的等级（rank）来进行选择，优先保留等级较高的个体
 % 输入:

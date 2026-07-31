@@ -98,7 +98,7 @@ for n=1:Generaciones
     MODEDat.CounterFES = FES;      % 记录函数评估次数
     
     % 打印和显示当前代数结果
-    [OUT MODEDat] = PrinterDisplay(OUT, MODEDat);
+    [OUT, MODEDat] = PrinterDisplay(OUT, MODEDat);
     
     % 检查终止条件
     if FES > MODEDat.MAXFUNEVALS || n > MODEDat.MAXGEN
@@ -177,9 +177,7 @@ Conjunto = zeros(Xpop, Nvar);
 k = 0;
 
 for xpop=1:Xpop
-    Dominado = 0;  % 假设该个体不被支
-
-配
+    Dominado = 0;  % 假设该个体不被支配
     
     for compara=1:Xpop
         if F(xpop,:) == F(compara,:)

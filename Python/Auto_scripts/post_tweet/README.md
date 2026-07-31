@@ -1,5 +1,8 @@
 # 发布推文脚本
 
+> [!IMPORTANT]
+> 当前脚本只从环境变量读取凭证。本页保留原始逐行讲解；实际使用请先看 [统一运行与安全说明](../STANDARDIZED_USAGE.md)，并以 [post_tweet.py](post_tweet.py) 为准。
+
 ### **脚本功能说明**
 
 这个Python脚本的主要功能是**使用 `Tweepy` 库向 Twitter 发布推文**。它通过Twitter的API接口进行身份验证，然后发布指定的推文。具体步骤如下：
@@ -10,6 +13,8 @@
 ### **带注释的Python脚本**
 
 ```python
+import os
+
 import tweepy  # 导入 tweepy 库，用于与 Twitter API 进行交互
 
 # 发布推文的函数
@@ -38,11 +43,11 @@ def post_tweet(api_key, api_secret, access_token, access_token_secret, message):
 
 # 使用示例
 if __name__ == "__main__":
-    # Twitter 开发者凭据
-    api_key = 'your_api_key'  # 请替换为您的 Twitter API Key
-    api_secret = 'your_api_secret'  # 请替换为您的 Twitter API Secret Key
-    access_token = 'your_access_token'  # 请替换为您的访问令牌
-    access_token_secret = 'your_access_token_secret'  # 请替换为您的访问令牌密钥
+    # 从环境变量读取凭据，不要把真实值写入代码。
+    api_key = os.getenv('X_API_KEY')
+    api_secret = os.getenv('X_API_SECRET')
+    access_token = os.getenv('X_ACCESS_TOKEN')
+    access_token_secret = os.getenv('X_ACCESS_TOKEN_SECRET')
 
     # 要发布的推文内容
     message = 'Hello, Twitter!'
@@ -92,12 +97,12 @@ if __name__ == "__main__":
 3. **使用示例**
     ```python
     if __name__ == "__main__":
-        # Twitter 开发者凭据
-        api_key = 'your_api_key'
-        api_secret = 'your_api_secret'
-        access_token = 'your_access_token'
-        access_token_secret = 'your_access_token_secret'
-        
+        # 从环境变量读取 Twitter/X 开发者凭据。
+        api_key = os.getenv('X_API_KEY')
+        api_secret = os.getenv('X_API_SECRET')
+        access_token = os.getenv('X_ACCESS_TOKEN')
+        access_token_secret = os.getenv('X_ACCESS_TOKEN_SECRET')
+
         # 要发布的推文内容
         message = 'Hello, Twitter!'
 

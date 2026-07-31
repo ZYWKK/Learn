@@ -5,13 +5,14 @@ def _append_log(log_path, message):
     with open(log_path, "a", encoding="utf-8") as log_file:
         log_file.write(message + "\n")
 
-def remove_empty_folders(directory_path, log_path=None):
+def remove_empty_folders(directory_path, log_path=None, dry_run=True):
     """
     递归删除指定目录及其子目录中的所有空文件夹。
 
     参数:
     directory_path (str): 需要清理的目标目录的路径。
     log_path (str): 删除日志文件路径，默认保存在目标目录下。
+    dry_run (bool): 为 True 时只列出空目录，不执行删除。
     """
     if log_path is None:
         log_path = os.path.join(directory_path, "remove_empty_folders.log")
@@ -22,6 +23,9 @@ def remove_empty_folders(directory_path, log_path=None):
         for folder in dirs:
             folder_path = os.path.join(root, folder)  # 构建子目录的完整路径
             if not os.listdir(folder_path):  # 检查子目录是否为空
+                if dry_run:
+                    print(f"预演：将删除空文件夹 {folder_path}")
+                    continue
                 try:
                     os.rmdir(folder_path)  # 删除空的子目录
                     print(f"已删除空文件夹: {folder_path}")  # 打印删除操作（可选）
@@ -32,5 +36,5 @@ def remove_empty_folders(directory_path, log_path=None):
 
 # 使用示例
 if __name__ == "__main__":
-    # 调用remove_empty_folders函数，传入要清理的目录路径
-    remove_empty_folders('/path/to/directory')  # 请将'/path/to/directory'替换为实际路径
+    # 默认只预演。确认列表无误后，再传入 dry_run=False。
+    remove_empty_folders('/path/to/directory')

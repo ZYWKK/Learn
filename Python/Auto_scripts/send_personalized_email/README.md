@@ -1,5 +1,8 @@
 # 发送个性化邮件
 
+> [!IMPORTANT]
+> 当前脚本只从环境变量读取 SMTP 凭证，并使用 TLS。本页保留原始逐行讲解；实际使用请先看 [统一运行与安全说明](../STANDARDIZED_USAGE.md)，并以 [send_personalized_email.py](send_personalized_email.py) 为准。
+
 ### **脚本功能说明**
 
 这个Python脚本的主要功能是**使用SMTP协议通过Gmail服务器向多个收件人发送个性化电子邮件**。具体步骤如下：
@@ -12,6 +15,7 @@
 ### **带注释的Python脚本**
 
 ```python
+import os
 import smtplib  # 导入smtplib模块，用于发送电子邮件
 from email.mime.text import MIMEText  # 从email模块导入MIMEText，用于构建电子邮件正文
 from email.mime.multipart import MIMEMultipart  # 从email模块导入MIMEMultipart，用于构建多部分邮件
@@ -51,9 +55,9 @@ def send_personalized_email(sender_email, sender_password, recipients, subject, 
 
 # 使用示例
 if __name__ == "__main__":
-    # 定义发件人信息、收件人列表、邮件主题和正文
-    sender_email = 'your_email@gmail.com'  # 发件人电子邮件地址
-    sender_password = 'your_password'  # 发件人电子邮件密码
+    # 从环境变量读取凭据，不要把邮箱密码写入代码。
+    sender_email = os.getenv('SMTP_SENDER')
+    sender_password = os.getenv('SMTP_PASSWORD')
     recipients = ['recipient1@example.com', 'recipient2@example.com']  # 收件人电子邮件地址列表
     subject = 'Hello'  # 邮件主题
     body = 'This is a test email.'  # 邮件正文
@@ -123,8 +127,8 @@ if __name__ == "__main__":
 6. **使用示例**
     ```python
     if __name__ == "__main__":
-        sender_email = 'your_email@gmail.com'
-        sender_password = 'your_password'
+        sender_email = os.getenv('SMTP_SENDER')
+        sender_password = os.getenv('SMTP_PASSWORD')
         recipients = ['recipient1@example.com', 'recipient2@example.com']
         subject = 'Hello'
         body = 'This is a test email.'

@@ -15,7 +15,8 @@ def make_features(x, degree):
 
 
 def predict(x, weights):
-    return sum(feature * weight for feature, weight in zip(make_features(x, len(weights) - 1), weights))
+    features = make_features(x, len(weights) - 1)
+    return sum(feature * weight for feature, weight in zip(features, weights))
 
 
 def mse(samples, weights):

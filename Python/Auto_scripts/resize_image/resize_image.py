@@ -1,7 +1,9 @@
+from pathlib import Path
+
 from PIL import Image  # 从 PIL 库（Pillow）中导入 Image 模块，用于处理图像
 
 # 调整图像尺寸的函数
-def resize_image(input_path, output_path, width, height):
+def resize_image(input_path, output_path, width, height, overwrite=False):
     """
     将输入的图像调整为指定宽度和高度，并保存到输出路径。
 
@@ -11,14 +13,14 @@ def resize_image(input_path, output_path, width, height):
     width (int): 调整后图像的宽度（像素）。
     height (int): 调整后图像的高度（像素）。
     """
-    # 打开输入图像文件
-    image = Image.open(input_path)
+    if Path(output_path).exists() and not overwrite:
+        raise FileExistsError(f"输出文件已存在: {output_path}")
 
-    # 调整图像的大小，使用 ANTIALIAS 算法提高质量
-    resized_image = image.resize((width, height), Image.ANTIALIAS)
-
-    # 保存调整后的图像到指定输出路径
-    resized_image.save(output_path)
+    # 使用上下文管理器确保图像文件及时关闭。
+    with Image.open(input_path) as image:
+        # 使用 Pillow 当前推荐的 Lanczos 重采样算法提高缩放质量
+        resized_image = image.resize((width, height), Image.Resampling.LANCZOS)
+        resized_image.save(output_path)
 
 # 使用示例
 if __name__ == "__main__":

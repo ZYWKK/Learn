@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pandas as pd  # 导入pandas库，用于处理Excel文件
 
 # 读取Excel文件的函数
@@ -16,7 +18,7 @@ def read_excel(file_path):
     return df  # 返回读取到的数据框
 
 # 将数据写入Excel文件的函数
-def write_to_excel(data, file_path):
+def write_to_excel(data, file_path, overwrite=False):
     """
     将数据写入Excel文件。
 
@@ -24,10 +26,14 @@ def write_to_excel(data, file_path):
     data (dict or DataFrame): 要写入Excel的数据，可以是字典或DataFrame。
     file_path (str): 输出Excel文件的路径。
     """
+    output_path = Path(file_path)
+    if output_path.exists() and not overwrite:
+        raise FileExistsError(f"输出文件已存在: {output_path}")
+
     # 将数据转换为DataFrame对象
     df = pd.DataFrame(data)
     # 使用 pandas 将 DataFrame 写入 Excel 文件
-    df.to_excel(file_path, index=False)  # index=False 表示不写入行索引
+    df.to_excel(output_path, index=False)  # index=False 表示不写入行索引
 
 # 使用示例
 if __name__ == "__main__":
