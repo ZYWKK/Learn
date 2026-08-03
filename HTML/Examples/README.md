@@ -24,6 +24,7 @@
 | 案例 | 入口 | 学习重点 |
 | :--- | :--- | :--- |
 | 交互组件集合 | [interactive-components/index.html](interactive-components/index.html) | Tabs、FAQ、Toast、进度步骤 |
+| 现代 Web API 实验台 | [modern-web-apis/index.html](modern-web-apis/index.html) | Web Components、Container Queries、Popover、View Transitions |
 
 ### 布局类
 
@@ -38,6 +39,7 @@
 3. 再看 `style.css`，理解布局和视觉样式。
 4. 如果有 `script.js`，最后看交互逻辑。
 5. 每次只改一小处，例如颜色、文案、卡片数量或按钮动作。
+6. 学完基础交互后，再看 [现代 Web API 实验台说明](modern-web-apis/README.md)，理解特性检测和渐进增强。
 
 ## 修改练习
 
@@ -51,4 +53,3 @@
 ## 参考来源
 
 这些案例为本仓库原创轻量示例，但学习方向参考了常见网页练习项目和模板资源。更多外部资源见 [HTML 优秀开源项目导读](../EXTERNAL_REPOSITORIES.md)。
-

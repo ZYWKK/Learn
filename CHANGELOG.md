@@ -2,6 +2,21 @@
 
 这个文件记录仓库中比较重要的文档结构调整，方便以后回看每一轮优化做了什么。
 
+## 2026-08-03
+
+### 新增
+
+- 新增 [Python 现代 AI 原理案例](<Python/Modern AI/README.md>)，使用标准库演示缩放点积注意力、BPE、迷你 RAG 检索和 LoRA 低秩更新。
+- 新增 [现代 Web API 实验台](HTML/Examples/modern-web-apis/README.md)，演示 Web Components、Container Queries、Popover、View Transitions 和渐进增强。
+- 新增 [Matlab 现代计算案例](<Matlab/Modern Computing/README.md>)，补充因果自注意力和物理约束损失脚本。
+- 新增 [Mathematica 可运行案例](Mathematica/Examples/README.md)，补充图社区发现、符号化物理损失和轻量神经分类 `.wl` 源码。
+- 新增 [GitHub Actions 自动检查教程](Github/docs/part5-advanced-tools/5.2-github-actions-ci.md) 与 Python 质量检查工作流模板。
+
+### 优化
+
+- 更新根目录、各主题 README、学习导读和知识地图，接通新增案例入口。
+- 将 Wolfram Language 示例约定补充到代码规范和 `.editorconfig`。
+
 ## 2026-07-31
 
 ### 新增

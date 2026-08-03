@@ -9,6 +9,7 @@
 - [Mathematica 专题学习指南](TOPIC_GUIDE.md)
 - [Mathematica Notebook 写作指南](NOTEBOOK_GUIDE.md)
 - [Mathematica 基础教程](Basics/README.md)
+- [Mathematica 可运行案例](Examples/README.md)
 - [Mathematica.md](Mathematica.md)：旧版命令速查笔记
 
 ## 基础教程内容
@@ -24,6 +25,16 @@
 - 绘图与可视化
 - 文件导入导出与练习路线
 
+## 可运行案例
+
+[Examples](Examples/README.md) 把教程概念组合成完整 Wolfram Language 脚本：
+
+- 图社区发现与可视化
+- 符号化物理约束损失
+- 高层神经网络分类流程
+
+建议先在 Notebook 中逐段运行，再尝试使用配置好 Kernel 的 `wolframscript` 执行整个 `.wl` 文件。
+
 ## 学习建议
 
 Mathematica 很适合做符号推导、数学实验和快速可视化。新手建议先熟悉：
@@ -36,4 +47,4 @@ Mathematica 很适合做符号推导、数学实验和快速可视化。新手�
 
 如果你只是想快速查某个命令，可以看 [Mathematica.md](Mathematica.md)。
 
-如果你想先建立学习路线、理解规则替换、符号计算、绘图和与 Matlab/Python 的区别，可以先看 [Mathematica 学习导读](LEARNING_GUIDE.md)。
+如果你想先建立学习路线、理解规则替换、符号计算、绘图和与 Matlab/Python 的区别，可以先看 [Mathematica 学习导读](LEARNING_GUIDE.md)。掌握基础后，再用 [可运行案例](Examples/README.md) 把零散命令连成完整流程。

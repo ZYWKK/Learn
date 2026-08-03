@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="使用原生 Web Components、Container Queries、Popover 和 View Transitions 的教学案例。">
+  <title>现代 Web API 实验台</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="section-label">HTML / CSS / JavaScript</p>
+      <h1>现代 Web API 实验台</h1>
+    </div>
+    <button
+      class="status-button"
+      id="popover-button"
+      type="button"
+      aria-controls="api-popover"
+      aria-expanded="false"
+    >
+      API 状态
+    </button>
+  </header>
+
+  <main>
+    <section class="control-band" aria-labelledby="control-title">
+      <div class="control-intro">
+        <h2 id="control-title">调整组件环境</h2>
+        <p>改变的是组件容器，不是浏览器窗口。卡片会通过 Container Queries 自己决定布局。</p>
+      </div>
+
+      <label class="width-control" for="stage-width">
+        <span>组件容器宽度</span>
+        <output id="width-output" for="stage-width">760 px</output>
+        <input id="stage-width" type="range" min="320" max="900" value="760" step="20">
+      </label>
+
+      <div class="filter-control">
+        <span id="filter-label">内容筛选</span>
+        <div class="segmented-control" role="group" aria-labelledby="filter-label">
+          <button type="button" data-filter="all" aria-pressed="true">全部</button>
+          <button type="button" data-filter="core" aria-pressed="false">核心</button>
+          <button type="button" data-filter="advanced" aria-pressed="false">进阶</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-band" aria-labelledby="demo-title">
+      <div class="section-heading">
+        <p class="section-label">可复用自定义元素</p>
+        <h2 id="demo-title">浏览器原生组件</h2>
+      </div>
+
+      <div class="component-stage" id="component-stage">
+        <learning-topic category="core" level="01">
+          <span slot="title">Web Components</span>
+          用 Custom Elements 定义新标签，用 Shadow DOM 隔离组件内部结构与样式。
+          <span slot="meta">查看 script.js 中的 LearningTopic 类</span>
+        </learning-topic>
+
+        <learning-topic category="core" level="02">
+          <span slot="title">Container Queries</span>
+          组件根据自己所在容器的宽度改变排版，因此同一个组件可以复用在主栏或侧栏。
+          <span slot="meta">拖动上方宽度滑块观察变化</span>
+        </learning-topic>
+
+        <learning-topic category="advanced" level="03">
+          <span slot="title">Popover API</span>
+          浏览器负责顶层显示、轻触关闭和焦点相关行为，减少手写浮层状态的工作量。
+          <span slot="meta">点击右上角的“API 状态”</span>
+        </learning-topic>
+
+        <learning-topic category="advanced" level="04">
+          <span slot="title">View Transition API</span>
+          在 DOM 状态更新前后创建视觉过渡；不支持时仍然直接完成内容切换。
+          <span slot="meta">切换“核心”和“进阶”筛选</span>
+        </learning-topic>
+      </div>
+
+      <p class="empty-state" id="empty-state" hidden>当前筛选没有可显示的组件。</p>
+    </section>
+
+    <section class="principles-band" aria-labelledby="principles-title">
+      <div class="section-heading">
+        <p class="section-label">实现原则</p>
+        <h2 id="principles-title">先保证可用，再增加新能力</h2>
+      </div>
+      <dl class="principle-list">
+        <div>
+          <dt>特性检测</dt>
+          <dd>先判断 API 是否存在，再决定启用原生能力或普通回退。</dd>
+        </div>
+        <div>
+          <dt>状态同步</dt>
+          <dd>视觉状态与 ARIA 属性一起更新，键盘和辅助技术也能理解。</dd>
+        </div>
+        <div>
+          <dt>减少依赖</dt>
+          <dd>这个案例不需要 npm、框架、组件库或远程 CDN。</dd>
+        </div>
+      </dl>
+    </section>
+  </main>
+
+  <aside class="api-popover" id="api-popover" hidden>
+    <p class="section-label">当前浏览器</p>
+    <h2>原生 API 支持情况</h2>
+    <ul id="support-list"></ul>
+    <p class="support-note">不支持的功能会使用基础回退，不影响阅读内容。</p>
+  </aside>
+
+  <footer>
+    <p>纯原生实现，可直接查看源代码。</p>
+  </footer>
+</body>
+</html>

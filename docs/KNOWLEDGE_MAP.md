@@ -19,12 +19,12 @@ flowchart TD
 | 目录 | 主要解决的问题 | 学完后的能力 |
 | :--- | :--- | :--- |
 | `Markdown` | 如何写清楚文档 | 写 README、教程、学习笔记 |
-| `Github` | 如何保存和协作修改 | 提交、推送、分支、PR |
+| `Github` | 如何保存、协作和自动检查修改 | 提交、推送、分支、PR、CI |
 | `Linux` | 如何使用命令行和服务器 | 文件操作、SSH、服务排查 |
-| `Python` | 如何写自动化脚本 | 文件处理、数据处理、小工具 |
-| `HTML` | 如何修改静态网页 | 改页面结构、样式、交互 |
-| `Matlab` | 如何做工程计算和算法实验 | 矩阵、绘图、优化、神经网络 |
-| `Mathematica` | 如何做符号计算和数学可视化 | 公式推导、微积分、绘图 |
+| `Python` | 如何写脚本并理解现代 AI 原理 | 文件处理、数据处理、小工具、AI 基础 |
+| `HTML` | 如何修改网页和使用现代浏览器 API | 页面结构、样式、交互、原生组件 |
+| `Matlab` | 如何做工程计算和算法实验 | 矩阵、绘图、现代计算、优化、神经网络 |
+| `Mathematica` | 如何做符号计算和数学可视化 | 公式推导、微积分、图计算、机器学习 |
 | `docs` | 如何组织学习过程 | 路线、练习、排错、复盘 |
 | `scripts` | 如何维护仓库文档 | 检查链接、代码块和 README |
 
@@ -71,6 +71,15 @@ flowchart TD
 2. [Matlab 示例运行指南](../Matlab/RUNNING_EXAMPLES.md)
 3. [Python 多目标优化示例](<../Python/Multi-Objective Optimization/README.md>)
 4. [Mathematica 学习导读](../Mathematica/LEARNING_GUIDE.md)
+
+### 我想理解现代 AI 和计算方法
+
+推荐路线：
+
+1. [Python 现代 AI 原理案例](<../Python/Modern AI/README.md>)
+2. [Matlab 现代计算案例](<../Matlab/Modern Computing/README.md>)
+3. [Mathematica 可运行案例](../Mathematica/Examples/README.md)
+4. [现代 Web API 实验台](../HTML/Examples/modern-web-apis/README.md)
 
 ## 学习策略
 

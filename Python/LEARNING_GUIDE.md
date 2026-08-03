@@ -27,7 +27,8 @@ Python 入门不要只盯着语法。更好的路线是：先能运行脚本，�
 5. [文件读写与异常处理](Basics/1.6-files-exceptions.md)
 6. [虚拟环境与第三方库](Basics/1.7-venv-packages.md)
 7. [Auto_scripts 脚本索引](Auto_scripts/README.md)
-8. [优秀开源仓库导读](EXTERNAL_REPOSITORIES.md)
+8. [现代 AI 原理案例](<Modern AI/README.md>)
+9. [优秀开源仓库导读](EXTERNAL_REPOSITORIES.md)
 
 ## 小项目学习路线
 
@@ -39,6 +40,7 @@ Python 入门不要只盯着语法。更好的路线是：先能运行脚本，�
 -> 图片或 PDF 批处理
 -> 网站状态检测
 -> 简单机器学习或优化示例
+-> 现代 AI 原理示例
 ```
 
 每个小项目都先回答四个问题：
@@ -133,4 +135,4 @@ python tool.py .\data
 
 ## 下一步
 
-先从 [Auto_scripts](Auto_scripts/README.md) 选一个风险低的脚本，例如文本统计或网站检测，读懂后改成自己的小工具。别急，能把一个脚本讲明白，比收藏十个脚本更有用。
+先从 [Auto_scripts](Auto_scripts/README.md) 选一个风险低的脚本，例如文本统计或网站检测，读懂后改成自己的小工具。掌握函数和列表后，再进入 [现代 AI 原理案例](<Modern AI/README.md>)，把注意力、Tokenizer、RAG 和 LoRA 拆成小步骤理解。

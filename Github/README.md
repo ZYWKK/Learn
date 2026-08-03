@@ -19,6 +19,7 @@
 4. [第三部分：团队协作核心工作流](docs/part3-teamwork/3.1-branching.md)
 5. [第四部分：团队规范与协作礼仪](docs/part4-conventions/4.1-gitignore-guide.md)
 6. [第五部分：扩展应用与效率技巧](docs/part5-advanced-tools/5.1-url-shortener.md)
+7. [用 GitHub Actions 自动检查代码](docs/part5-advanced-tools/5.2-github-actions-ci.md)
 
 如果你只想解决一个具体问题，可以直接跳到下面的章节。
 
@@ -60,6 +61,8 @@
 ### 第五部分：扩展应用与效率技巧
 
 - [5.1 GitHub 脚本域名短链化与国内加速访问](docs/part5-advanced-tools/5.1-url-shortener.md)
+- [5.2 用 GitHub Actions 自动检查代码](docs/part5-advanced-tools/5.2-github-actions-ci.md)
+- [GitHub Actions Python 质量检查模板](examples/python-quality.yml)
 
 ## 学习建议
 

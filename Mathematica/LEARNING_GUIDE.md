@@ -20,8 +20,9 @@ Mathematica / Wolfram Language 的强项是符号计算、公式推导、可视�
 ## 推荐阅读顺序
 
 1. [Mathematica 基础教程](Basics/README.md)
-2. [旧版命令速查笔记](Mathematica.md)
-3. 本文的专题路线和对照学习说明
+2. [Mathematica 可运行案例](Examples/README.md)
+3. [旧版命令速查笔记](Mathematica.md)
+4. 本文的专题路线和对照学习说明
 
 ## 学习地图
 
@@ -33,6 +34,7 @@ Mathematica / Wolfram Language 的强项是符号计算、公式推导、可视�
 -> 数值计算
 -> 绘图与可视化
 -> 数据导入导出
+-> 图计算 / 科学机器学习案例
 ```
 
 ## 核心概念
@@ -132,4 +134,4 @@ ContourPlot[x^2 + y^2, {x, -2, 2}, {y, -2, 2}]
 
 ## 下一步
 
-建议先把基础教程里的符号计算、矩阵、绘图章节跑一遍，再把同一个数学问题分别用 Mathematica、Matlab、Python 写一版。对照学习会很快暴露三种工具的思维差异。
+先把基础教程里的符号计算、矩阵和绘图章节跑一遍，再进入 [可运行案例](Examples/README.md)。其中物理约束损失案例还可以和 [Matlab 现代计算版本](<../Matlab/Modern Computing/README.md>) 对照阅读。

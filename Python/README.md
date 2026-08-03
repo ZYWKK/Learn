@@ -58,6 +58,19 @@
 
 这些示例优先使用 Python 标准库，适合先理解原理，再继续学习 NumPy、scikit-learn 或 PyTorch。
 
+### Modern AI
+
+[Modern AI](<Modern AI/README.md>) 用纯 Python 标准库拆解现代生成式 AI 的基础原理。
+
+当前示例：
+
+- 缩放点积注意力与因果遮罩
+- 迷你 BPE Tokenizer
+- 基于 TF-IDF 的迷你 RAG 检索流程
+- LoRA 低秩权重更新
+
+这些案例不会下载模型或调用在线 API，适合在进入 PyTorch、Transformers 和向量数据库之前建立计算直觉。
+
 ### Multi-Objective Optimization
 
 [Multi-Objective Optimization](<Multi-Objective Optimization/README.md>) 保存 Python 多目标优化入门示例。

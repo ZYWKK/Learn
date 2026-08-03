@@ -28,13 +28,13 @@
 
 | 专题 | 入口 | 适合人群 | 重点内容 |
 | :--- | :--- | :--- | :--- |
-| GitHub | [Github](Github/README.md) | 不熟悉 Git 和 GitHub 的新手 | Git 基础、提交推送、分支、PR、冲突处理 |
+| GitHub | [Github](Github/README.md) | 不熟悉 Git 和 GitHub 的新手 | Git 基础、提交推送、分支、PR、Actions 自动检查 |
 | Linux | [Linux](Linux/README.md) | 想学习命令行、VPS、SSH 的用户 | 文件操作、权限、服务、网络、SSH 安全 |
 | Markdown | [Markdown](Markdown/README.md) | 想写文档、博客、README 的用户 | 标题、列表、表格、代码块、Mermaid、模板 |
-| Python | [Python](Python/README.md) | 想入门编程、自动化脚本和算法示例的用户 | 基础语法、脚本集合、神经网络、多目标优化 |
-| HTML | [HTML](HTML/README.md) | 想修改网页示例的用户 | HTML、CSS、JavaScript、静态页面案例和网页模板导读 |
-| Matlab | [Matlab](Matlab/README.md) | 做工程计算、优化算法、神经网络的用户 | 基础教程、多目标优化、神经网络案例 |
-| Mathematica | [Mathematica](Mathematica/README.md) | 做符号计算和数学可视化的用户 | Wolfram Language 基础、绘图、矩阵、微积分 |
+| Python | [Python](Python/README.md) | 想入门编程、自动化脚本和算法示例的用户 | 基础语法、脚本、神经网络、现代 AI、多目标优化 |
+| HTML | [HTML](HTML/README.md) | 想修改网页示例的用户 | HTML、CSS、JavaScript、静态页面和现代 Web API |
+| Matlab | [Matlab](Matlab/README.md) | 做工程计算、优化算法、神经网络的用户 | 基础教程、现代计算、多目标优化、神经网络 |
+| Mathematica | [Mathematica](Mathematica/README.md) | 做符号计算和数学可视化的用户 | Wolfram Language 基础、符号计算、图与机器学习案例 |
 
 ## 推荐入口
 
@@ -59,6 +59,7 @@
 - [GitHub 常见问题](Github/FAQ.md)
 - [GitHub 真实场景指南](Github/SCENARIOS.md)
 - [Pull Request Review 入门指南](Github/REVIEW_GUIDE.md)
+- [GitHub Actions 自动检查教程](Github/docs/part5-advanced-tools/5.2-github-actions-ci.md)
 - [Linux 学习导读](Linux/LEARNING_GUIDE.md)
 - [Linux 常见问题](Linux/FAQ.md)
 - [Linux VPS 日常运维导读](Linux/OPERATIONS_GUIDE.md)
@@ -75,6 +76,7 @@
 - [Python 优秀开源仓库导读](Python/EXTERNAL_REPOSITORIES.md)
 - [HTML 基础教程](HTML/Basics/README.md)
 - [HTML 静态网页案例集合](HTML/Examples/README.md)
+- [现代 Web API 实验台](HTML/Examples/modern-web-apis/README.md)
 - [HTML 优秀网页项目导读](HTML/EXTERNAL_REPOSITORIES.md)
 
 ### 计算与建模
@@ -84,6 +86,7 @@
 - [Matlab 常见问题](Matlab/FAQ.md)
 - [Matlab 案例阅读指南](Matlab/CASE_READING_GUIDE.md)
 - [Matlab 数据与绘图入门指南](Matlab/DATA_PLOT_GUIDE.md)
+- [Matlab 现代计算案例](<Matlab/Modern Computing/README.md>)
 - [Matlab 示例运行指南](Matlab/RUNNING_EXAMPLES.md)
 - [Matlab 示例运行索引](Matlab/EXAMPLE_RUN_INDEX.md)
 - [Mathematica 学习笔记](Mathematica/README.md)
@@ -91,6 +94,7 @@
 - [Mathematica 常见问题](Mathematica/FAQ.md)
 - [Mathematica 专题学习指南](Mathematica/TOPIC_GUIDE.md)
 - [Mathematica Notebook 写作指南](Mathematica/NOTEBOOK_GUIDE.md)
+- [Mathematica 可运行案例](Mathematica/Examples/README.md)
 
 ### 脚本与模板
 
@@ -99,6 +103,7 @@
 - [Python 自动化脚本统一运行与安全说明](Python/Auto_scripts/STANDARDIZED_USAGE.md)
 - [Python 神经网络示例](<Python/Neural Network/README.md>)
 - [Python 神经网络模型选择指南](<Python/Neural Network/MODEL_SELECTION.md>)
+- [Python 现代 AI 原理案例](<Python/Modern AI/README.md>)
 - [Python 多目标优化示例](<Python/Multi-Objective Optimization/README.md>)
 - [Python 多目标优化算法索引](<Python/Multi-Objective Optimization/ALGORITHM_INDEX.md>)
 - [Markdown 示例与模板](Markdown/examples/README.md)
@@ -140,6 +145,7 @@ Learn/
 - 分支、Pull Request、冲突解决
 - `.gitignore`、Commit 规范、Issue 写法
 - GitHub 脚本短链和 Cloudflare Workers 实用技巧
+- GitHub Actions 自动代码检查与安全基础
 
 ### Linux
 
@@ -192,6 +198,7 @@ Learn/
 - [Basics](Python/Basics/README.md)：Python 基础教程，适合新手入门
 - [Auto_scripts](Python/Auto_scripts/README.md)：日常自动化脚本集合
 - [Neural Network](<Python/Neural Network/README.md>)：神经网络入门示例
+- [Modern AI](<Python/Modern AI/README.md>)：注意力、BPE、迷你 RAG 和 LoRA 原理示例
 - [Multi-Objective Optimization](<Python/Multi-Objective Optimization/README.md>)：多目标优化入门示例
 - [Grab](Python/Grab/README.md)：图片抓取示例
 - [Love](Python/Love/README.md)：Python 图形小程序示例
@@ -203,7 +210,7 @@ Learn/
 [HTML](HTML/README.md) 目录保存网页基础教程和静态页面示例：
 
 - [Basics](HTML/Basics/README.md)：HTML、CSS、JavaScript 基础教程
-- [Examples](HTML/Examples/README.md)：作品集、产品落地页、餐厅展示页、数据面板、交互组件和价格页案例
+- [Examples](HTML/Examples/README.md)：静态页面、数据面板、交互组件和现代 Web API 案例
 - [优秀外部项目导读](HTML/EXTERNAL_REPOSITORIES.md)：适合初学者继续练习的网页项目和模板资源
 - [Birthday](HTML/Birthday/README.md)：生日快乐网页
 - [Love](HTML/Love/README.md)：表白网页示例
@@ -219,6 +226,7 @@ Learn/
 - [案例阅读指南](Matlab/CASE_READING_GUIDE.md)：如何拆解 Matlab 算法和模型案例的入口、数据、参数和输出
 - [数据与绘图入门指南](Matlab/DATA_PLOT_GUIDE.md)：数据导入、表格/矩阵选择、绘图结构和结果解释
 - [Basics](Matlab/Basics/README.md)：Matlab 基础命令、矩阵、绘图、脚本、函数和并行计算
+- [Modern Computing](<Matlab/Modern Computing/README.md>)：自注意力与物理约束损失原理案例
 - [Multi-Objective Optimization](<Matlab/Multi-Objective Optimization/README.md>)：多目标优化算法示例
 - [Neural Network](<Matlab/Neural Network/README.md>)：分类、回归、时间序列预测等神经网络案例
 - [示例运行指南](Matlab/RUNNING_EXAMPLES.md)：运行 Matlab 案例前的路径、数据、工具箱和报错排查
@@ -228,7 +236,7 @@ Learn/
 
 ### Mathematica
 
-[Mathematica](Mathematica/README.md) 记录 Mathematica / Wolfram Language 基础教程和命令速查笔记，适合做符号计算、公式推导、矩阵运算和数学可视化。建议先看 [Mathematica 学习导读](Mathematica/LEARNING_GUIDE.md)、[常见问题](Mathematica/FAQ.md)、[专题学习指南](Mathematica/TOPIC_GUIDE.md) 和 [Notebook 写作指南](Mathematica/NOTEBOOK_GUIDE.md)，再进入基础教程。
+[Mathematica](Mathematica/README.md) 记录 Mathematica / Wolfram Language 基础教程、命令速查和可运行脚本，适合做符号计算、公式推导、矩阵运算和数学可视化。建议先看 [Mathematica 学习导读](Mathematica/LEARNING_GUIDE.md)，再进入 [基础教程](Mathematica/Basics/README.md) 和 [可运行案例](Mathematica/Examples/README.md)。
 
 ## 文档维护
 
